@@ -1,0 +1,49 @@
+@model IEnumerable<Lo.Data.Models.Lo_Inventory>
+ 
+ 
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">View Inventory</h4> 
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered zero-configuration">
+                <thead>
+                    <tr>
+                        <th>   </th> 
+                        <th>Item Name</th>
+ 
+                    </tr> 
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>                            
+                            <td>@Html.ActionLink("Select", "edit_Inventory", new
+                           {
+                            id=item.Id, 
+                            Item_Name = item.Item_name
+                               })</td> 
+                           <td>@Html.DisplayFor(modelItem => item.Item_name)</td>
+                        </tr>
+                    }
+                    
+                </tbody>
+                <tfoot>
+                    <tr>                        
+                        <th>   </th> 
+                        <th>Item Name</th>
+ 
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div> 
+<script> 
+    function msg(txt) {
+        sweetAlert("...", txt, "info");
+    }
+    var statusMessage = "@ViewBag.status" || false; 
+    if (statusMessage != false && statusMessage.length > 0) {
+        msg(statusMessage); 
+    }
+</script>

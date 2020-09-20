@@ -1,0 +1,69 @@
+@model IEnumerable<Lo.Models.Lo_Inventory_Movement_data>
+ 
+ 
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">View Inventory Movement</h4> 
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered zero-configuration">
+                <thead>
+                    <tr>
+                        <th>   </th> 
+                        <th>inventory</th>
+                        <th>quantity</th>
+                        <th>direction</th>
+                        <th>by satff</th>
+                        <th>to staff</th>
+                        <th>move date</th>
+ 
+                    </tr> 
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>                            
+                            <td>@Html.ActionLink("Select", "edit_Inventory_Movement", new
+                           {
+                            id=item.Id, 
+                            move_date = item.Move_date
+                            ,to_staff = item.To_staff
+                            ,by_satff = item.By_satff
+                            ,direction = item.Direction
+                            ,quantity = item.Quantity
+                            ,inventory = item.Inventory
+                               })</td> 
+                           <td>@Html.DisplayFor(modelItem => item.Inventory_data)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Direction)</td>
+                           <td>@Html.DisplayFor(modelItem => item.By_satff_data)</td>
+                           <td>@Html.DisplayFor(modelItem => item.To_staff_data)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Move_date)</td>
+                        </tr>
+                    }
+                    
+                </tbody>
+                <tfoot>
+                    <tr>                        
+                        <th>   </th> 
+                        <th>inventory</th>
+                        <th>quantity</th>
+                        <th>direction</th>
+                        <th>by satff</th>
+                        <th>to staff</th>
+                        <th>move date</th>
+ 
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div> 
+<script> 
+    function msg(txt) {
+        sweetAlert("...", txt, "info");
+    }
+    var statusMessage = "@ViewBag.status" || false; 
+    if (statusMessage != false && statusMessage.length > 0) {
+        msg(statusMessage); 
+    }
+</script>
