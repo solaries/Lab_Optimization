@@ -399,7 +399,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_role_Staff("");
+            Session["response"] = centralCalls.get_role_Staff(" where a.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_role_Staff_data>)Session["response"]) ));
         }
 
@@ -513,7 +513,7 @@ namespace Lo.Controllers
 
 
         [AllowAnonymous]
-        public ActionResult new_Test Type()
+        public ActionResult new_Test_Type()
         {
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -536,7 +536,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult new_Test Type(string Test_name,string Price,string Lab )
+        public ActionResult new_Test_Type(string Test_name,string Price,string Lab )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -557,18 +557,18 @@ namespace Lo.Controllers
                 {
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
-                ActionResult xx =  add_Test Type(Test_name: Test_name,Price: Price,Lab: Lab,token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+                ActionResult xx =  add_Test_Type(Test_name: Test_name,Price: Price,Lab: Lab,token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
                 }
                 response = (string)Session["response"];
                 Session["status"] = response;
-                return RedirectToAction("new_Test Type", "Staff");
+                return RedirectToAction("new_Test_Type", "Staff");
         } 
 
         [AllowAnonymous]
-        public ActionResult add_Test Type(string Test_name,string Price,string Lab,string token, string role)
+        public ActionResult add_Test_Type(string Test_name,string Price,string Lab,string token, string role)
         { 
                 Audit.protocol();
                 Session["status"] = "";
@@ -590,7 +590,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult view_Test Type()
+        public ActionResult view_Test_Type()
         {
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -611,7 +611,7 @@ namespace Lo.Controllers
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
             List<Lo_Test_Type> response = null; 
-           ActionResult d =  view_it_Test Type(Session["token"].ToString()  , Session["role"].ToString()  ); 
+           ActionResult d =  view_it_Test_Type(Session["token"].ToString()  , Session["role"].ToString()  ); 
                 if(Session["status"].ToString()=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
@@ -620,7 +620,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult view_it_Test Type(string token, string role)
+        public ActionResult view_it_Test_Type(string token, string role)
         {
                 Audit.protocol();
                 Session["status"] = "";
@@ -641,7 +641,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult edit_Test Type(string id,string Test_name,string Price,string Lab  )
+        public ActionResult edit_Test_Type(string id,string Test_name,string Price,string Lab  )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -669,7 +669,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult edit_Test Type(string id,string oTest_name,string oPrice,string oLab,string Test_name,string Price,string Lab )
+        public ActionResult edit_Test_Type(string id,string oTest_name,string oPrice,string oLab,string Test_name,string Price,string Lab )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -689,7 +689,7 @@ namespace Lo.Controllers
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
             string response =null;
-                ActionResult xx =  update_Test Type(id:id,oTest_name:  oTest_name,oPrice:  oPrice,oLab:  oLab,Test_name: Test_name,Price: Price,Lab: Lab, token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+                ActionResult xx =  update_Test_Type(id:id,oTest_name:  oTest_name,oPrice:  oPrice,oLab:  oLab,Test_name: Test_name,Price: Price,Lab: Lab, token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
@@ -697,17 +697,17 @@ namespace Lo.Controllers
                 response = (string)Session["response"];
                 Session["status"] = response;
                 if(response.IndexOf("uccess") > -1){
-                    return RedirectToAction("view_Test Type", "Staff");
+                    return RedirectToAction("view_Test_Type", "Staff");
                 }
                 else{
-                    return RedirectToAction("view_Test Type", "Staff");
+                    return RedirectToAction("view_Test_Type", "Staff");
                      return View();
                 }
-                return RedirectToAction("new_Test Type", "Staff");
+                return RedirectToAction("new_Test_Type", "Staff");
         } 
 
         [AllowAnonymous]
-        public ActionResult update_Test Type(string id, string oTest_name,string oPrice,string oLab,string Test_name,string Price,string Lab,string token, string role)
+        public ActionResult update_Test_Type(string id, string oTest_name,string oPrice,string oLab,string Test_name,string Price,string Lab,string token, string role)
         { 
                 Audit.protocol();
                 Session["status"] = "";
@@ -952,7 +952,7 @@ namespace Lo.Controllers
 
 
         [AllowAnonymous]
-        public ActionResult new_Patient Tests()
+        public ActionResult new_Patient_Tests()
         {
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -976,7 +976,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult new_Patient Tests(string Patient,string Test_date )
+        public ActionResult new_Patient_Tests(string Patient,string Test_date )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -997,18 +997,18 @@ namespace Lo.Controllers
                 {
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
-                ActionResult xx =  add_Patient Tests(Patient: Patient,Test_date: Test_date,token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+                ActionResult xx =  add_Patient_Tests(Patient: Patient,Test_date: Test_date,token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
                 }
                 response = (string)Session["response"];
                 Session["status"] = response;
-                return RedirectToAction("new_Patient Tests", "Staff");
+                return RedirectToAction("new_Patient_Tests", "Staff");
         } 
 
         [AllowAnonymous]
-        public ActionResult add_Patient Tests(string Patient,string Test_date,string token, string role)
+        public ActionResult add_Patient_Tests(string Patient,string Test_date,string token, string role)
         { 
                 Audit.protocol();
                 Session["status"] = "";
@@ -1030,7 +1030,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult view_Patient Tests()
+        public ActionResult view_Patient_Tests()
         {
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1051,7 +1051,7 @@ namespace Lo.Controllers
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
             List<Lo_Tests> response = null; 
-           ActionResult d =  view_it_Patient Tests(Session["token"].ToString()  , Session["role"].ToString()  ); 
+           ActionResult d =  view_it_Patient_Tests(Session["token"].ToString()  , Session["role"].ToString()  ); 
                 if(Session["status"].ToString()=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
@@ -1060,7 +1060,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult view_it_Patient Tests(string token, string role)
+        public ActionResult view_it_Patient_Tests(string token, string role)
         {
                 Audit.protocol();
                 Session["status"] = "";
@@ -1081,7 +1081,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult edit_Patient Tests(string id,string Patient,string Test_date  )
+        public ActionResult edit_Patient_Tests(string id,string Patient,string Test_date  )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1109,7 +1109,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult edit_Patient Tests(string id,string oPatient,string oTest_date,string Patient,string Test_date )
+        public ActionResult edit_Patient_Tests(string id,string oPatient,string oTest_date,string Patient,string Test_date )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1129,7 +1129,7 @@ namespace Lo.Controllers
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
             string response =null;
-                ActionResult xx =  update_Patient Tests(id:id,oPatient:  oPatient,oTest_date:  oTest_date,Patient: Patient,Test_date: Test_date, token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+                ActionResult xx =  update_Patient_Tests(id:id,oPatient:  oPatient,oTest_date:  oTest_date,Patient: Patient,Test_date: Test_date, token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
@@ -1137,17 +1137,17 @@ namespace Lo.Controllers
                 response = (string)Session["response"];
                 Session["status"] = response;
                 if(response.IndexOf("uccess") > -1){
-                    return RedirectToAction("view_Patient Tests", "Staff");
+                    return RedirectToAction("view_Patient_Tests", "Staff");
                 }
                 else{
-                    return RedirectToAction("view_Patient Tests", "Staff");
+                    return RedirectToAction("view_Patient_Tests", "Staff");
                      return View();
                 }
-                return RedirectToAction("new_Patient Tests", "Staff");
+                return RedirectToAction("new_Patient_Tests", "Staff");
         } 
 
         [AllowAnonymous]
-        public ActionResult update_Patient Tests(string id, string oPatient,string oTest_date,string Patient,string Test_date,string token, string role)
+        public ActionResult update_Patient_Tests(string id, string oPatient,string oTest_date,string Patient,string Test_date,string token, string role)
         { 
                 Audit.protocol();
                 Session["status"] = "";

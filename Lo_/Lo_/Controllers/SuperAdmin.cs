@@ -423,6 +423,193 @@ namespace Lo.Controllers
         }
 
 
+
+        [AllowAnonymous]
+        public ActionResult new_Administrators()
+        {
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "SuperAdmin");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "SuperAdmin");
+            }
+            ViewBag.Data0 =  centralCalls.get_role_Admin("");
+            ViewBag.Data1 =  centralCalls.get_Lab("");
+            getStatus();
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult new_Administrators(string First_name,string Last_name,string Email,string Role,string Password,string Password2,string Lab )
+        {  
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "SuperAdmin");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "SuperAdmin");
+            }
+                
+            if(Password == null)
+            {
+                 Password = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes( Audit.GetEncodedHash(Audit.GenerateRandom(), "doing it well")));;
+            }
+            if(Password2 == null)
+            {
+                 Password2 = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes( Audit.GetEncodedHash(Audit.GenerateRandom(), "doing it well")));;
+            }
+                string response =null;
+                if (!validateAccessToken(Session["token"].ToString()))
+                {
+                    Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "SuperAdmin");
+                }
+                ActionResult xx =  add_Administrators(First_name: First_name,Last_name: Last_name,Email: Email,Role: Role,Password: Password,Password2: Password2,Lab: Lab,token: Session["token"].ToString() ); 
+                response = (string)Session["response"];
+                Session["status"] = response;
+                return RedirectToAction("new_Administrators", "SuperAdmin");
+        } 
+
+        [AllowAnonymous]
+        public ActionResult add_Administrators(string First_name,string Last_name,string Email,string Role,string Password,string Password2,string Lab,string token)
+        { 
+                Audit.protocol();
+                Session["status"] = "";
+            if (!validateAccessToken(token)) 
+            { 
+                Session["status"] = "Invalid Token";
+                Session["response"]  = "Invalid Token";
+                return Content("Invalid Token"); 
+            } 
+            string response = null;  
+            response =  centralCalls.add_new_authenticate_Admin(First_name: First_name,Last_name: Last_name,Email: Email,Role: Role,Password: Password,Password2: Password2,Lab: Lab);
+            Session["response"]  = response;
+            return Content((string)response);
+        }
+
+        [AllowAnonymous]
+        public ActionResult view_Administrators()
+        {
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "SuperAdmin");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "SuperAdmin");
+            }
+            getStatus();
+                if (!validateAccessToken(Session["token"].ToString()))
+                {
+                    Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "SuperAdmin");
+                }
+            List<Lo_authenticate_Admin> response = null; 
+           ActionResult d =  view_it_Administrators(Session["token"].ToString()  ); 
+            return View((List<Lo_authenticate_Admin_data>)Session["response"]);
+        }
+
+        [AllowAnonymous]
+        public ActionResult view_it_Administrators(string token)
+        {
+                Audit.protocol();
+                Session["status"] = "";
+            if (!validateAccessToken(token)) 
+            { 
+                Session["response"] = new List<Lo_authenticate_Admin>(); 
+                Session["status"] = "Invalid Token";
+                return Content("Invalid Token"); 
+            } 
+            getStatus();
+            Session["response"] = centralCalls.get_authenticate_Admin("");
+            return Content(JsonConvert.SerializeObject( ((List<Lo_authenticate_Admin_data>)Session["response"]) ));
+        }
+
+        [AllowAnonymous]
+        public ActionResult edit_Administrators(string id,string First_name,string Last_name,string Email,string Role,string Password,string Password2,string Lab  )
+        {  
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "SuperAdmin");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "SuperAdmin");
+            }
+            ViewBag.Data0 =  centralCalls.get_role_Admin("");
+            ViewBag.Data1 =  centralCalls.get_Lab("");
+            getStatus();
+            ViewBag.id=id;
+             ViewBag.First_name = First_name;
+ ViewBag.Last_name = Last_name;
+ ViewBag.Email = Email;
+ ViewBag.Role = Role;
+ ViewBag.Password = Password;
+ ViewBag.Password2 = Password2;
+ ViewBag.Lab = Lab;
+
+            return View();
+        } 
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult edit_Administrators(string id,string oFirst_name,string oLast_name,string oEmail,string oRole,string oPassword,string oPassword2,string oLab,string First_name,string Last_name,string Email,string Role,string Password,string Password2,string Lab )
+        {  
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "SuperAdmin");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "SuperAdmin");
+            }
+                if (!validateAccessToken(Session["token"].ToString()))
+                {
+                    Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "SuperAdmin");
+                }
+            string response =null;
+                ActionResult xx =  update_Administrators(id:id,oFirst_name:  oFirst_name,oLast_name:  oLast_name,oEmail:  oEmail,oRole:  oRole,oPassword:  oPassword,oPassword2:  oPassword2,oLab:  oLab,First_name: First_name,Last_name: Last_name,Email: Email,Role: Role,Password: Password,Password2: Password2,Lab: Lab, token: Session["token"].ToString() ); 
+                response = (string)Session["response"];
+                Session["status"] = response;
+                if(response.IndexOf("uccess") > -1){
+                    return RedirectToAction("view_Administrators", "SuperAdmin");
+                }
+                else{
+                    return RedirectToAction("view_Administrators", "SuperAdmin");
+                     return View();
+                }
+                return RedirectToAction("new_Administrators", "SuperAdmin");
+        } 
+
+        [AllowAnonymous]
+        public ActionResult update_Administrators(string id, string oFirst_name,string oLast_name,string oEmail,string oRole,string oPassword,string oPassword2,string oLab,string First_name,string Last_name,string Email,string Role,string Password,string Password2,string Lab,string token)
+        { 
+                Audit.protocol();
+                Session["status"] = "";
+            if (!validateAccessToken(token)) 
+            { 
+                Session["status"] = "Invalid Token";
+                Session["response"]  = "Invalid Token";
+                return Content("Invalid Token"); 
+            } 
+            string response = null;  
+            response =  centralCalls.update_authenticate_Admin(id:id,oFirst_name:  oFirst_name,oLast_name:  oLast_name,oEmail:  oEmail,oRole:  oRole,oPassword:  oPassword,oPassword2:  oPassword2,oLab:  oLab,First_name: First_name,Last_name: Last_name,Email: Email,Role: Role,Password: Password,Password2: Password2,Lab: Lab,andPassword: false);
+            Session["response"]  = response;
+            return Content((string)response);
+        }
+
+
    
     }
 } 

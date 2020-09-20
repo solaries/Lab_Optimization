@@ -1,0 +1,58 @@
+C:\code\Lab_Optimization\Lo_\Lo_\obj\Debug\Lo_.csprojResolveAssemblyReference.cache
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Lab Optimum.dll.config
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Lab Optimum.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Lab Optimum.pdb
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.CSharp.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Cors.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Security.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Security.OAuth.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Web.Infrastructure.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\mysql.data.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Newtonsoft.Json.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\NPoco.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Owin.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.ComponentModel.DataAnnotations.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Configuration.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Data.DataSetExtensions.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Data.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Drawing.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.EnterpriseServices.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Net.Http.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Net.Http.Formatting.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.ApplicationServices.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Cors.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.DynamicData.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Entity.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Extensions.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Helpers.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Http.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Http.WebHost.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Mvc.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Razor.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Services.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Webpages.Deployment.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Webpages.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Webpages.Razor.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Xml.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Xml.Linq.dll
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Cors.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Security.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Microsoft.Owin.Security.OAuth.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\Newtonsoft.Json.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Razor.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Webpages.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Webpages.Deployment.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Webpages.Razor.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Helpers.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Mvc.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Net.Http.Formatting.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Http.xml
+C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Http.WebHost.xml
+C:\code\Lab_Optimization\Lo_\Lo_\obj\Debug\Lab Optimum.dll
+C:\code\Lab_Optimization\Lo_\Lo_\obj\Debug\Lab Optimum.pdb

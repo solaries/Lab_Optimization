@@ -5083,6 +5083,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\authenticate_Admin.cs" />
+    <Compile Include="Models\authenticate_Staff.cs" />
+    <Compile Include="Models\authenticate_SuperAdmin.cs" />
+    <Compile Include="Models\Inventory.cs" />
+    <Compile Include="Models\Inventory_Movement.cs" />
+    <Compile Include="Models\Lab.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\right_Admin.cs" />
+    <Compile Include="Models\right_Staff.cs" />
+    <Compile Include="Models\role_Admin.cs" />
+    <Compile Include="Models\role_right_Admin.cs" />
+    <Compile Include="Models\role_right_Staff.cs" />
+    <Compile Include="Models\role_Staff.cs" />
+    <Compile Include="Models\Test_List.cs" />
+    <Compile Include="Models\Test_Type.cs" />
+    <Compile Include="Models\Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -5367,15 +5383,15 @@
     <Content Include="Views\Staff\new_Roles.cshtml" />
     <Content Include="Views\Staff\view_Roles.cshtml" />
     <Content Include="Views\Staff\edit_Roles.cshtml" />
-    <Content Include="Views\Staff\new_Test Type.cshtml" />
-    <Content Include="Views\Staff\view_Test Type.cshtml" />
-    <Content Include="Views\Staff\edit_Test Type.cshtml" />
+    <Content Include="Views\Staff\new_Test_Type.cshtml" />
+    <Content Include="Views\Staff\view_Test_Type.cshtml" />
+    <Content Include="Views\Staff\edit_Test_Type.cshtml" />
     <Content Include="Views\Staff\new_Patient.cshtml" />
     <Content Include="Views\Staff\view_Patient.cshtml" />
     <Content Include="Views\Staff\edit_Patient.cshtml" />
-    <Content Include="Views\Staff\new_Patient Tests.cshtml" />
-    <Content Include="Views\Staff\view_Patient Tests.cshtml" />
-    <Content Include="Views\Staff\edit_Patient Tests.cshtml" />
+    <Content Include="Views\Staff\new_Patient_Tests.cshtml" />
+    <Content Include="Views\Staff\view_Patient_Tests.cshtml" />
+    <Content Include="Views\Staff\edit_Patient_Tests.cshtml" />
     <Content Include="Views\Staff\new_Test_List.cshtml" />
     <Content Include="Views\Staff\view_Test_List.cshtml" />
     <Content Include="Views\Staff\edit_Test_List.cshtml" />
@@ -5390,6 +5406,9 @@
     <Content Include="Views\SuperAdmin\new_Labs.cshtml" />
     <Content Include="Views\SuperAdmin\view_Labs.cshtml" />
     <Content Include="Views\SuperAdmin\edit_Labs.cshtml" />
+    <Content Include="Views\SuperAdmin\new_Administrators.cshtml" />
+    <Content Include="Views\SuperAdmin\view_Administrators.cshtml" />
+    <Content Include="Views\SuperAdmin\edit_Administrators.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\shared\_Admin.cshtml" />
     <Content Include="Views\shared\_Staff.cshtml" />

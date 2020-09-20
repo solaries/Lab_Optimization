@@ -399,7 +399,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_role_Admin("");
+            Session["response"] = centralCalls.get_role_Admin(" where a.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_role_Admin_data>)Session["response"]) ));
         }
 

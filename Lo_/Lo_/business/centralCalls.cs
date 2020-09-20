@@ -67,9 +67,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_authenticate_admin_data> get_authenticate_Admin(string sql)
+        public static List<Lo_authenticate_Admin_data> get_authenticate_Admin(string sql)
         { 
-            List<Lo_authenticate_admin_data> response = null;
+            List<Lo_authenticate_Admin_data> response = null;
             try
             { 
                 authenticate_Admin c = new authenticate_Admin(); 
@@ -167,9 +167,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_authenticate_staff_data> get_authenticate_Staff(string sql)
+        public static List<Lo_authenticate_Staff_data> get_authenticate_Staff(string sql)
         { 
-            List<Lo_authenticate_staff_data> response = null;
+            List<Lo_authenticate_Staff_data> response = null;
             try
             { 
                 authenticate_Staff c = new authenticate_Staff(); 
@@ -263,9 +263,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_authenticate_superadmin> get_authenticate_SuperAdmin(string sql)
+        public static List<Lo_authenticate_SuperAdmin> get_authenticate_SuperAdmin(string sql)
         { 
-            List<Lo_authenticate_superadmin> response = null;
+            List<Lo_authenticate_SuperAdmin> response = null;
             try
             { 
                 authenticate_SuperAdmin c = new authenticate_SuperAdmin(); 
@@ -349,9 +349,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_inventory> get_Inventory(string sql)
+        public static List<Lo_Inventory> get_Inventory(string sql)
         { 
-            List<Lo_inventory> response = null;
+            List<Lo_Inventory> response = null;
             try
             { 
                 Inventory c = new Inventory(); 
@@ -435,9 +435,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_inventory_movement_data> get_Inventory_Movement(string sql)
+        public static List<Lo_Inventory_Movement_data> get_Inventory_Movement(string sql)
         { 
-            List<Lo_inventory_movement_data> response = null;
+            List<Lo_Inventory_Movement_data> response = null;
             try
             { 
                 Inventory_Movement c = new Inventory_Movement(); 
@@ -520,9 +520,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_lab> get_Lab(string sql)
+        public static List<Lo_Lab> get_Lab(string sql)
         { 
-            List<Lo_lab> response = null;
+            List<Lo_Lab> response = null;
             try
             { 
                 Lab c = new Lab(); 
@@ -606,9 +606,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_patient_data> get_Patient(string sql)
+        public static List<Lo_Patient_data> get_Patient(string sql)
         { 
-            List<Lo_patient_data> response = null;
+            List<Lo_Patient_data> response = null;
             try
             { 
                 Patient c = new Patient(); 
@@ -691,9 +691,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_right_admin> get_right_Admin(string sql)
+        public static List<Lo_right_Admin> get_right_Admin(string sql)
         { 
-            List<Lo_right_admin> response = null;
+            List<Lo_right_Admin> response = null;
             try
             { 
                 right_Admin c = new right_Admin(); 
@@ -768,9 +768,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_right_staff> get_right_Staff(string sql)
+        public static List<Lo_right_Staff> get_right_Staff(string sql)
         { 
-            List<Lo_right_staff> response = null;
+            List<Lo_right_Staff> response = null;
             try
             { 
                 right_Staff c = new right_Staff(); 
@@ -847,9 +847,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_role_admin_data> get_role_Admin(string sql)
+        public static List<Lo_role_Admin_data> get_role_Admin(string sql)
         { 
-            List<Lo_role_admin_data> response = null;
+            List<Lo_role_Admin_data> response = null;
             try
             { 
                 role_Admin c = new role_Admin(); 
@@ -928,9 +928,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_role_right_admin_data> get_role_right_Admin(string sql)
+        public static List<Lo_role_right_Admin_data> get_role_right_Admin(string sql)
         { 
-            List<Lo_role_right_admin_data> response = null;
+            List<Lo_role_right_Admin_data> response = null;
             try
             { 
                 role_right_Admin c = new role_right_Admin(); 
@@ -1009,9 +1009,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_role_right_staff_data> get_role_right_Staff(string sql)
+        public static List<Lo_role_right_Staff_data> get_role_right_Staff(string sql)
         { 
-            List<Lo_role_right_staff_data> response = null;
+            List<Lo_role_right_Staff_data> response = null;
             try
             { 
                 role_right_Staff c = new role_right_Staff(); 
@@ -1090,9 +1090,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_role_staff_data> get_role_Staff(string sql)
+        public static List<Lo_role_Staff_data> get_role_Staff(string sql)
         { 
-            List<Lo_role_staff_data> response = null;
+            List<Lo_role_Staff_data> response = null;
             try
             { 
                 role_Staff c = new role_Staff(); 
@@ -1171,9 +1171,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_test_list_data> get_Test_List(string sql)
+        public static List<Lo_Test_List_data> get_Test_List(string sql)
         { 
-            List<Lo_test_list_data> response = null;
+            List<Lo_Test_List_data> response = null;
             try
             { 
                 Test_List c = new Test_List(); 
@@ -1254,9 +1254,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_test_type_data> get_Test_Type(string sql)
+        public static List<Lo_Test_Type_data> get_Test_Type(string sql)
         { 
-            List<Lo_test_type_data> response = null;
+            List<Lo_Test_Type_data> response = null;
             try
             { 
                 Test_Type c = new Test_Type(); 
@@ -1335,9 +1335,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_tests_data> get_Tests(string sql)
+        public static List<Lo_Tests_data> get_Tests(string sql)
         { 
-            List<Lo_tests_data> response = null;
+            List<Lo_Tests_data> response = null;
             try
             { 
                 Tests c = new Tests(); 
