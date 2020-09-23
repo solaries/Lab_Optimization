@@ -11,7 +11,7 @@ namespace Lo.Models
 { 
     public class Test_Type 
     { 
-        public string add_Test_Type(Lo_Test_Type new_Test_Type, bool returnID = false ) 
+        public string add_Test_Type(Lo_Test_Type new_Test_Type, string Price, bool returnID = false ) 
          {
              string result = "";
              if(returnID){
@@ -21,6 +21,14 @@ namespace Lo.Models
              {
                  var context = Lo.Data.Models.Lo.GetInstance();
                  var x = context.Insert<Lo_Test_Type>(new_Test_Type);
+
+                 Lo_Test_Type_Price p = new Lo_Test_Type_Price();
+                 p.Enter_date = DateTime.Now;
+                 //p.Test_name = new_Test_Type.Test_name;
+                 p.Price = float.Parse(Price);
+                 p.Test_type = long.Parse(x.ToString());
+                 context.Insert<Lo_Test_Type_Price>(p);
+
                 if(returnID){
                     result =x.ToString().Trim();
                 }
@@ -31,13 +39,22 @@ namespace Lo.Models
              }
              return result;
          }
-         public string update_Test_Type(Lo_Test_Type new_Test_Type)
+         public string update_Test_Type(Lo_Test_Type new_Test_Type,string price)
          {
              string result = "";
              try
              {
                  var context = Lo.Data.Models.Lo.GetInstance();
                  var x = context.Update(new_Test_Type);
+
+
+                 Lo_Test_Type_Price p = new Lo_Test_Type_Price();
+                 p.Enter_date = DateTime.Now;
+                 //p.Test_name = new_Test_Type.Test_name;
+                 p.Price = float.Parse(price);
+                 p.Test_type = new_Test_Type.Id;
+                 context.Insert<Lo_Test_Type_Price>(p);
+
              }
              catch (Exception dd)
              {
@@ -48,7 +65,7 @@ namespace Lo.Models
          public List<Lo_Test_Type_data> get_Test_Type_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_Test_Type_data>( "select a.id , a.test_name , a.price , a.lab , a1.Lab  lab_data    from Lo_Test_Type a  inner join  Lo_Lab a1 on a.lab = a1.id "  + sql);
+             var actual = context.Fetch<Lo_Test_Type_data>("select a.id , a2.id id2, a.test_name , a2.price , a.lab , a1.Lab  lab_data    from Lo_Test_Type a  inner join  Lo_Lab a1 on a.lab = a1.id inner join  (SELECT * from lo_test_type_price WHERE id IN ( SELECT id FROM (SELECT MAX(id) id,test_type FROM lo_test_type_price GROUP BY test_type  ) a )) a2 on a.id = a2.test_type" + sql);
              return actual;
          }  
          public List<Lo_Test_Type> get_Test_Type(string sql)
@@ -67,6 +84,15 @@ namespace Lo.Models
         set { _Id = value;  }  
     }  
     long _Id;
+
+    [Column("id2")]  
+    public long Id2  
+    {  
+        get { return _Id2; }  
+        set { _Id2 = value;  }  
+    }  
+    long _Id2;
+
     [Column("test_name")]  
     public string Test_name  
     {  

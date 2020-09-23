@@ -1231,11 +1231,11 @@ namespace Lo.BusinessLogic
                 Lo_Test_Type cust = new Lo_Test_Type(); 
                 cust.Test_name =  Test_name;
                 data += ",Test_name : " + Test_name;
-                cust.Price =   float.Parse(Price);
-                 data += ",Price : " + Price;
+                //cust.Price =   float.Parse(Price);
+                // data += ",Price : " + Price;
                 cust.Lab =  long.Parse( Lab == null ? "1" : Lab)  ;
                  data += ",Lab : " + Lab;
-                response = c.add_Test_Type(cust,  returnID  );
+                response = c.add_Test_Type(cust, Price,  returnID  );
                if( returnID  ){
                     Audit.InsertAudit((int)eventzz.SUCCESSFUL_TEST_TYPE_ADD, data, getVal(), true); 
                     return response;
@@ -1282,11 +1282,11 @@ namespace Lo.BusinessLogic
                 Lo_Test_Type cust = c.get_Test_Type(" where id = " + id  )[0]; 
                 cust.Test_name =  Test_name;
                 data += ",Test_name : " + oTest_name + " -> " + Test_name;
-                 cust.Price =   float.Parse(Price);
-                 data += ",Price : " + oPrice + " -> " + Price;
+                 //cust.Price =   float.Parse(Price);
+                 //data += ",Price : " + oPrice + " -> " + Price;
                  cust.Lab =  long.Parse( Lab == null ? "1" : Lab)  ;
                  data += ",Lab : " + oLab + " -> " + Lab;
-                response = c.update_Test_Type(cust);
+                 response = c.update_Test_Type(cust, Price);
                 if (response.Trim().Length > 0)
                 {
                     Audit.InsertAudit((int)eventzz.FAILED_TEST_TYPE_UPDATE, data, getVal(), true);
@@ -1305,7 +1305,7 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static string add_new_Tests(string Patient,string Test_date, bool returnID = false )
+        public static string add_new_Tests(string Patient, string Test_date, string selectedTests, bool returnID = false)
         { 
             string response = ""; 
             Tests c = new Tests();  
@@ -1317,7 +1317,7 @@ namespace Lo.BusinessLogic
                 cust.Patient =  long.Parse( Patient == null ? "1" : Patient)  ;
                 data += ",Patient : " + Patient;
                  cust.Test_date = System.DateTime.Now;
-                response = c.add_Tests(cust,  returnID  );
+                 response = c.add_Tests(cust, selectedTests, returnID);
                if( returnID  ){
                     return response;
                }
@@ -1353,7 +1353,7 @@ namespace Lo.BusinessLogic
             }  
             return response;
         }
-        public static string update_Tests( string id, string oPatient,string oTest_date,string Patient,string Test_date, bool andPassword = true) 
+        public static string update_Tests(string id, string oPatient, string oTest_date, string Patient, string Test_date, string selectedTests, bool andPassword = true) 
         { 
             string response = ""; 
             Tests c = new Tests();   
@@ -1363,7 +1363,7 @@ namespace Lo.BusinessLogic
                 Lo_Tests cust = c.get_Tests(" where id = " + id  )[0]; 
                 cust.Patient =  long.Parse( Patient == null ? "1" : Patient)  ;
                 data += ",Patient : " + oPatient + " -> " + Patient;
-                response = c.update_Tests(cust);
+                response = c.update_Tests(cust, selectedTests);
                 if (response.Trim().Length > 0)
                 {
                     Audit.InsertAudit((int)eventzz.FAILED_TESTS_UPDATE, data, getVal(), true);

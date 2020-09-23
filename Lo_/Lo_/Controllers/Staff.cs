@@ -967,7 +967,10 @@ namespace Lo.Controllers
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
-            ViewBag.Data0 =  centralCalls.get_Patient("");
+            ViewBag.Data0 = centralCalls.get_Patient(" where a.lab = " + Session["Lab"]); 
+            ViewBag.Data1 = centralCalls.get_Test_Type(" where a.lab = " + Session["Lab"]);
+            //ViewBag.Data1 = centralCalls.get_Test_Type("");
+
             getStatus();
             return View();
         }
@@ -976,7 +979,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult new_Patient_Tests(string Patient,string Test_date )
+        public ActionResult new_Patient_Tests(string Patient, string Test_date, string selectedTests)
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -997,7 +1000,7 @@ namespace Lo.Controllers
                 {
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
-                ActionResult xx =  add_Patient_Tests(Patient: Patient,Test_date: Test_date,token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+                ActionResult xx = add_Patient_Tests(Patient: Patient, Test_date: Test_date, token: Session["token"].ToString(), role: Session["role"].ToString(), selectedTests: selectedTests); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
@@ -1008,7 +1011,7 @@ namespace Lo.Controllers
         } 
 
         [AllowAnonymous]
-        public ActionResult add_Patient_Tests(string Patient,string Test_date,string token, string role)
+        public ActionResult add_Patient_Tests(string Patient, string Test_date, string token, string role, string selectedTests)
         { 
                 Audit.protocol();
                 Session["status"] = "";
@@ -1023,8 +1026,8 @@ namespace Lo.Controllers
                 Session["response"]  = "Invalid Token";
                 return Content("Invalid Token"); 
             } 
-            string response = null;  
-            response =  centralCalls.add_new_Tests(Patient: Patient,Test_date: Test_date);
+            string response = null;
+            response = centralCalls.add_new_Tests(Patient: Patient, Test_date: Test_date, selectedTests: selectedTests);
             Session["response"]  = response;
             return Content((string)response);
         }
@@ -1076,7 +1079,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_Tests("");
+            Session["response"] = centralCalls.get_Tests(" where a1.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_Tests_data>)Session["response"]) ));
         }
 
@@ -1099,8 +1102,18 @@ namespace Lo.Controllers
             ViewBag.Data0 =  centralCalls.get_Patient("");
             getStatus();
             ViewBag.id=id;
-             ViewBag.Patient = Patient;
- ViewBag.Test_date = Test_date;
+            ViewBag.Patient = Patient;
+            ViewBag.Test_date = Test_date;
+            ViewBag.Data1 = centralCalls.get_Test_Type(" where a.lab = " + Session["Lab"]);
+
+            List<Lo_Test_List_data> testList = centralCalls.get_Test_List(" where a.Test = " + id);
+            string testSet = "";
+            foreach (Lo_Test_List_data test in testList)
+            {
+                testSet += "sphinxcol" + test.Test_type + "sphinxcol";
+            }
+            ViewBag.testSet = testSet;
+
 
             return View();
         } 
@@ -1109,7 +1122,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult edit_Patient_Tests(string id,string oPatient,string oTest_date,string Patient,string Test_date )
+        public ActionResult edit_Patient_Tests(string id,string oPatient,string oTest_date,string Patient,string Test_date, string selectedTests )
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1129,7 +1142,7 @@ namespace Lo.Controllers
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
             string response =null;
-                ActionResult xx =  update_Patient_Tests(id:id,oPatient:  oPatient,oTest_date:  oTest_date,Patient: Patient,Test_date: Test_date, token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+            ActionResult xx = update_Patient_Tests(id: id, oPatient: oPatient, oTest_date: oTest_date, Patient: Patient, Test_date: Test_date, token: Session["token"].ToString(), role: Session["role"].ToString(), selectedTests: selectedTests); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
@@ -1147,7 +1160,7 @@ namespace Lo.Controllers
         } 
 
         [AllowAnonymous]
-        public ActionResult update_Patient_Tests(string id, string oPatient,string oTest_date,string Patient,string Test_date,string token, string role)
+        public ActionResult update_Patient_Tests(string id, string oPatient, string oTest_date, string Patient, string Test_date, string token, string role, string selectedTests)
         { 
                 Audit.protocol();
                 Session["status"] = "";
@@ -1162,8 +1175,8 @@ namespace Lo.Controllers
                 Session["response"]  = "Invalid Token";
                 return Content("Invalid Token"); 
             } 
-            string response = null;  
-            response =  centralCalls.update_Tests(id:id,oPatient:  oPatient,oTest_date:  oTest_date,Patient: Patient,Test_date: Test_date,andPassword: false);
+            string response = null;
+            response = centralCalls.update_Tests(id: id, oPatient: oPatient, oTest_date: oTest_date, Patient: Patient, Test_date: Test_date, andPassword: false, selectedTests: selectedTests);
             Session["response"]  = response;
             return Content((string)response);
         }
@@ -1187,7 +1200,7 @@ namespace Lo.Controllers
                return RedirectToAction("Login", "Staff");
             }
             ViewBag.Data0 =  centralCalls.get_Tests("");
-            ViewBag.Data1 =  centralCalls.get_Test_Type("");
+            ViewBag.Data1 = centralCalls.get_Test_Type(" where a.lab = " + Session["Lab"]);
             getStatus();
             return View();
         }

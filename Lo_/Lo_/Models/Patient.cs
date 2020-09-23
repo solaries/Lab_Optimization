@@ -48,7 +48,7 @@ namespace Lo.Models
          public List<Lo_Patient_data> get_Patient_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_Patient_data>( "select a.id , a.first_name , a.Surname , a.Phone_number , a.Email , a.Date_Of_Birth , a.lab , a1.Lab  lab_data    from Lo_Patient a  inner join  Lo_Lab a1 on a.lab = a1.id "  + sql);
+             var actual = context.Fetch<Lo_Patient_data>("select a.id , concat( a.first_name, ' ', a.Surname) first_name, a.Surname , a.Phone_number , a.Email , DATE_FORMAT(a.Date_Of_Birth, '%d/%b/%Y')  Date_Of_Birth, a.lab , a1.Lab  lab_data    from Lo_Patient a  inner join  Lo_Lab a1 on a.lab = a1.id " + sql);
              return actual;
          }  
          public List<Lo_Patient> get_Patient(string sql)

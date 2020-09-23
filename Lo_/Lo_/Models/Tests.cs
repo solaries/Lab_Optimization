@@ -10,8 +10,8 @@ using System.Web;
 namespace Lo.Models 
 { 
     public class Tests 
-    { 
-        public string add_Tests(Lo_Tests new_Tests, bool returnID = false ) 
+    {
+        public string add_Tests(Lo_Tests new_Tests, string selectedTests, bool returnID = false) 
          {
              string result = "";
              if(returnID){
@@ -21,6 +21,21 @@ namespace Lo.Models
              {
                  var context = Lo.Data.Models.Lo.GetInstance();
                  var x = context.Insert<Lo_Tests>(new_Tests);
+
+
+
+                 List<Lo_Test_List> TestList = new List<Lo_Test_List>();
+                 string[] idList = selectedTests.Split(new string[] { "sphinxcol" }, StringSplitOptions.RemoveEmptyEntries);
+                 for (int i = 0; i < idList.Length; i++)
+                 {
+                     Lo_Test_List Test = new Lo_Test_List();
+                     Test.Test = long.Parse(x.ToString());
+                     Test.Test_type = long.Parse(idList[i]);
+                     TestList.Add(Test);
+                 }
+                 context.InsertBulk<Lo_Test_List>(TestList);
+
+
                 if(returnID){
                     result =x.ToString().Trim();
                 }
@@ -31,13 +46,32 @@ namespace Lo.Models
              }
              return result;
          }
-         public string update_Tests(Lo_Tests new_Tests)
+        public string update_Tests(Lo_Tests new_Tests, string selectedTests)
          {
              string result = "";
              try
              {
                  var context = Lo.Data.Models.Lo.GetInstance();
                  var x = context.Update(new_Tests);
+
+                 context.DeleteWhere<Lo_Test_List>(" test = " + new_Tests.Id.ToString());
+
+
+
+
+                 List<Lo_Test_List> TestList = new List<Lo_Test_List>();
+                 string[] idList = selectedTests.Split(new string[] { "sphinxcol" }, StringSplitOptions.RemoveEmptyEntries);
+                 for (int i = 0; i < idList.Length; i++)
+                 {
+                     Lo_Test_List Test = new Lo_Test_List();
+                     Test.Test = long.Parse(x.ToString());
+                     Test.Test_type = long.Parse(idList[i]);
+                     TestList.Add(Test);
+                 }
+                 context.InsertBulk<Lo_Test_List>(TestList);
+
+
+
              }
              catch (Exception dd)
              {

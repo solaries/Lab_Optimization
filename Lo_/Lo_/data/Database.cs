@@ -974,13 +974,13 @@ namespace Lo.Data.Models
       }  
       string   _Test_name;  
     
-     [Column("price")]  
-     public   float   Price  
-     {  
-         get { return _Price; }  
-         set { _Price = value; Track("price"); }  
-      }  
-       float   _Price;  
+     //[Column("price")]  
+     //public   float   Price  
+     //{  
+     //    get { return _Price; }  
+     //    set { _Price = value; Track("price"); }  
+     // }  
+     //  float   _Price;  
     
      [Column("lab")]  
      public  long  Lab  
@@ -1002,6 +1002,67 @@ namespace Lo.Data.Models
      }
   }
 
+
+
+ [TableName("Lo_Test_Type_Price")]
+ [PrimaryKey("id")]
+ [ExplicitColumns]
+ public partial class Lo_Test_Type_Price : Lo.Record<Lo_Test_Type_Price>
+ {
+     [Column("id")]  
+     public long Id  
+     {  
+         get { return _Id; }  
+         set { _Id = value; Track("id"); }  
+      }  
+     long _Id;
+
+
+     [Column("test_type")]
+     public long Test_type
+     {
+         get { return _Test_type; }
+         set { _Test_type = value; Track("test_type"); }
+     }
+     long _Test_type;  
+
+
+     //[Column("test_name")]  
+     //public  string   Test_name  
+     //{  
+     //    get { return _Test_name; }  
+     //    set { _Test_name = value; Track("test_name"); }  
+     // }  
+     // string   _Test_name;
+
+      [Column("price")]
+      public float Price
+      {
+          get { return _Price; }
+          set { _Price = value; Track("price"); }
+      }
+      float _Price;  
+
+     [Column("enter_date")]
+      public DateTime Enter_date 
+     {
+         get { return _Enter_date; }
+         set { _Enter_date = value; Track("enter_date"); }  
+      }
+     DateTime _Enter_date;
+
+     public static IEnumerable<Lo_Test_Type_Price> Query(Database db, string[] columns = null, long[] Id = null)
+     {
+  
+     var sql = new Sql();
+     if (columns != null)        sql.Select(columns);
+     sql.From("Lo_Test_Type_Price (NOLOCK)");  
+       if (Id != null)
+            sql.Where("id IN (@0)", Id);
+
+       return db.Query<Lo_Test_Type_Price>(sql);
+     }
+  }
 
  [TableName("Lo_Tests")]
  [PrimaryKey("id")]
