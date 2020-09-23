@@ -636,7 +636,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_Test_Type("");
+            Session["response"] = centralCalls.get_Test_Type(" where a.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_Test_Type_data>)Session["response"]) ));
         }
 
@@ -854,7 +854,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_Patient("");
+            Session["response"] = centralCalls.get_Patient(" where a.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_Patient_data>)Session["response"]) ));
         }
 

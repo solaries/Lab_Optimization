@@ -160,8 +160,8 @@ namespace Lo.Controllers
                             {
                                 strRightList += "sphinxcol" + right.Rightname + "sphinxcol";
                             }
-                            Session["strRightList"] = strRightList; 
-                            return RedirectToAction("Change_Password", "Admin"); 
+                            Session["strRightList"] = strRightList;
+                            return RedirectToAction("view_Staff", "Admin"); 
                         }
                     }
                     else
@@ -645,7 +645,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_authenticate_Staff("");
+            Session["response"] = centralCalls.get_authenticate_Staff(" where a.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_authenticate_Staff_data>)Session["response"]) ));
         }
 

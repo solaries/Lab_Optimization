@@ -580,7 +580,9 @@ namespace Lo.BusinessLogic
                  data += ",Phone_number : " + Phone_number;
                 cust.Email =  Email;
                  data += ",Email : " + Email;
-                 cust.Date_of_birth = System.DateTime.Now;
+                 cust.Date_of_birth = System.DateTime.Parse(Date_of_birth);
+
+                 data += ",Date_of_birth : " + Date_of_birth;
                 cust.Lab =  long.Parse( Lab == null ? "1" : Lab)  ;
                  data += ",Lab : " + Lab;
                 response = c.add_Patient(cust,  returnID  );
@@ -638,7 +640,9 @@ namespace Lo.BusinessLogic
                  data += ",Email : " + oEmail + " -> " + Email;
                  cust.Lab =  long.Parse( Lab == null ? "1" : Lab)  ;
                  data += ",Lab : " + oLab + " -> " + Lab;
-                response = c.update_Patient(cust);
+                 cust.Date_of_birth = DateTime.Parse(Date_of_birth);
+                 data += ",Date_of_birth : " + oDate_of_birth + " -> " + Date_of_birth;
+                 response = c.update_Patient(cust);
                 if (response.Trim().Length > 0)
                 {
                     Audit.InsertAudit((int)eventzz.FAILED_PATIENT_UPDATE, data, getVal(), true);
