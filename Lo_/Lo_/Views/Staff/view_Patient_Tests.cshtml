@@ -9,7 +9,9 @@
                 <thead>
                     <tr>
                         <th>   </th> 
+                        <th>   </th> 
                         <th>patient</th>
+                        <th>Total Bill</th>
                         <th>Test Date</th>
  
                     </tr> 
@@ -22,9 +24,22 @@
                            {
                             id=item.Id, 
                             Test_Date = item.Test_date
-                            ,patient = item.Patient
+                            ,
+                            patient = item.Patient,
+                            price = item.Price
                                })</td> 
+                            <td>
+                                @Html.ActionLink("Receipt", "receipt", new
+                           {
+                               id = item.Id,
+                               Test_Date = item.Test_date
+                            ,
+                               patient = item.Patient,
+                               price = item.Price
+                           })
+                        </td> 
                            <td>@Html.DisplayFor(modelItem => item.Patient_data)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Price)</td>
                            <td>@Html.DisplayFor(modelItem => item.Test_date)</td>
                         </tr>
                     }
@@ -32,10 +47,11 @@
                 </tbody>
                 <tfoot>
                     <tr>                        
+                        <th>   </th>
                         <th>   </th> 
                         <th>patient</th>
-                        <th>Test Date</th>
- 
+                        <th>Total Bill</th>
+                        <th>Test Date</th> 
                     </tr>
                 </tfoot>
             </table>

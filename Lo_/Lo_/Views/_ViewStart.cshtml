@@ -1,7 +1,10 @@
 @{ 
     var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
     var action = HttpContext.Current.Request.RequestContext.RouteData.Values["Action"].ToString();
-       if (action.ToLower() == "login" || action.ToLower() == "register")
+    if (action.ToLower() == "login" || action.ToLower() == "register" || action.ToLower() == "receipt"
+       || action.ToLower() == "receipt0"
+       || action.ToLower() == "receipt1" 
+       || action.ToLower() == "receipt2")
        { 
        }  
        else

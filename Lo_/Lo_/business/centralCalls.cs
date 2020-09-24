@@ -315,7 +315,7 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static string add_new_Inventory(string Item_name, bool returnID = false )
+        public static string add_new_Inventory(string Item_name,string lab, bool returnID = false )
         { 
             string response = ""; 
             Inventory c = new Inventory();  
@@ -326,6 +326,8 @@ namespace Lo.BusinessLogic
                 Lo_Inventory cust = new Lo_Inventory(); 
                 cust.Item_name =  Item_name;
                 data += ",Item_name : " + Item_name;
+                cust.Lab =  long.Parse(lab);
+                data += ",lab : " + lab;
                 response = c.add_Inventory(cust,  returnID  );
                if( returnID  ){
                     Audit.InsertAudit((int)eventzz.SUCCESSFUL_INVENTORY_ADD, data, getVal(), true); 
@@ -1175,6 +1177,8 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
+
+
         public static List<Lo_Test_List_data> get_Test_List(string sql)
         { 
             List<Lo_Test_List_data> response = null;
@@ -1258,6 +1262,7 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
+
         public static List<Lo_Test_Type_data> get_Test_Type(string sql)
         { 
             List<Lo_Test_Type_data> response = null;
@@ -1265,6 +1270,23 @@ namespace Lo.BusinessLogic
             { 
                 Test_Type c = new Test_Type(); 
                 response = c.get_Test_Type_linked(sql); 
+            }
+            catch (Exception d)
+            {
+                Audit.InsertAudit((int)eventzz.ERROR_TEST_TYPE_GET, d.Message + "  " + (d.InnerException != null ? d.InnerException.Message : ""), getVal(), true); 
+            }  
+            return response;
+        }
+
+
+
+        public static List<Lo_Test_Type_data> get_Test_Type2(string sql, string id)
+        { 
+            List<Lo_Test_Type_data> response = null;
+            try
+            { 
+                Test_Type c = new Test_Type(); 
+                response = c.get_Test_Type_linked2(sql, id); 
             }
             catch (Exception d)
             {

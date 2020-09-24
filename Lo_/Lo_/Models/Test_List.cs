@@ -48,7 +48,7 @@ namespace Lo.Models
          public List<Lo_Test_List_data> get_Test_List_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_Test_List_data>( "select a.id , a.Test , a1.Test_Date  Test_data  , a.Test_Type , a2.test_name  Test_Type_data    from Lo_Test_List a  inner join  Lo_Tests a1 on a.Test = a1.id  inner join  Lo_Test_Type a2 on a.Test_Type = a2.id "  + sql);
+             var actual = context.Fetch<Lo_Test_List_data>("select  a3.price,a.id , a.Test , a1.Test_Date  Test_data  , a.Test_Type , a2.test_name  Test_Type_data FROM Lo_Test_List a  inner JOIN Lo_Tests a1 on a.Test = a1.id  inner JOIN lo_test_type_price a3 on a.Test_Type = a3.id    inner JOIN  Lo_Test_Type a2 ON a3.Test_Type = a2.id  " + sql);
              return actual;
          }  
          public List<Lo_Test_List> get_Test_List(string sql)
@@ -88,6 +88,17 @@ namespace Lo.Models
         set { _Test_type = value;  }  
     }  
     string _Test_type;
+
+
+    [Column("price")]  
+    public float Price
+    {
+        get { return _Price; }
+        set { _Price = value;   }
+    }
+    float _Price;  
+
+
     [Column("Test_Type_data")]  
     public string Test_type_data  
     {  

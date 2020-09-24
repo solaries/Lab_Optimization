@@ -48,7 +48,7 @@ namespace Lo.Models
          public List<Lo_Inventory_Movement_data> get_Inventory_Movement_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_Inventory_Movement_data>( "select a.id , a.inventory , a1.Item_Name  inventory_data  , a.quantity , a.direction , a.by_satff , a2.first_name  by_satff_data  , a.to_staff , a3.first_name  to_staff_data  , a.move_date   from Lo_Inventory_Movement a  inner join  Lo_Inventory a1 on a.inventory = a1.id  inner join  Lo_authenticate_Staff a2 on a.by_satff = a2.id  inner join  Lo_authenticate_Staff a3 on a.to_staff = a3.id "  + sql);
+             var actual = context.Fetch<Lo_Inventory_Movement_data>("select a.id , a.inventory , a1.Item_Name  inventory_data  , a.quantity , if(a.direction=1,'Add','Allocate')  direction, a.by_satff , a2.first_name  by_satff_data  , a.to_staff , a3.first_name  to_staff_data  , a.move_date   from Lo_Inventory_Movement a  inner join  Lo_Inventory a1 on a.inventory = a1.id  inner join  Lo_authenticate_Staff a2 on a.by_satff = a2.id  left join  Lo_authenticate_Staff a3 on a.to_staff = a3.id  " + sql);
              return actual;
          }  
          public List<Lo_Inventory_Movement> get_Inventory_Movement(string sql)

@@ -128,7 +128,8 @@ namespace Lo.Controllers
                             Session["email"] = response[0].Email;
                             Session["first_name"] = response[0].First_name;
                             Session["last_name"] = response[0].Last_name;
-                            Session["Lab"] =  response[0].Lab;
+                            Session["Lab"] = response[0].Lab;
+                            Session["Lab_data"] = response[0].Lab_data;
                             Session["token"] = token;
                             Session["Password"] = Password;
                             List<Lo_right_Staff> rightList = centralCalls.get_right_Staff(" where id in (select `right` from Lo_role_right_Staff where role =" + response[0].Role.ToString() + " )   order by rightname");
@@ -150,7 +151,8 @@ namespace Lo.Controllers
                             Session["email"] = response[0].Email;
                             Session["first_name"] = response[0].First_name;
                             Session["last_name"] = response[0].Last_name;
-                            Session["Lab"] =  response[0].Lab;
+                            Session["Lab"] = response[0].Lab;
+                            Session["Lab_data"] = response[0].Lab_data;
                             Session["token"] = token;
                             Session["Password"] = Password;
                             Session["role"] = response[0].Role;
@@ -160,8 +162,8 @@ namespace Lo.Controllers
                             {
                                 strRightList += "sphinxcol" + right.Rightname + "sphinxcol";
                             }
-                            Session["strRightList"] = strRightList; 
-                            return RedirectToAction("Change_Password", "Staff"); 
+                            Session["strRightList"] = strRightList;
+                            return RedirectToAction("view_Patient_Tests", "Staff"); 
                         }
                     }
                     else
@@ -1084,7 +1086,7 @@ namespace Lo.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult edit_Patient_Tests(string id,string Patient,string Test_date  )
+        public ActionResult edit_Patient_Tests(string id, string Patient, string Test_date, string price)
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1104,13 +1106,17 @@ namespace Lo.Controllers
             ViewBag.id=id;
             ViewBag.Patient = Patient;
             ViewBag.Test_date = Test_date;
-            ViewBag.Data1 = centralCalls.get_Test_Type(" where a.lab = " + Session["Lab"]);
+            ViewBag.price = price;
+            ViewBag.Data1 = centralCalls.get_Test_Type2(" where a.lab = " + Session["Lab"], id);
 
-            List<Lo_Test_List_data> testList = centralCalls.get_Test_List(" where a.Test = " + id);
+            List<Lo_Test_List_data> testList = centralCalls.get_Test_List(" where a.Test = " + id );
             string testSet = "";
             foreach (Lo_Test_List_data test in testList)
             {
                 testSet += "sphinxcol" + test.Test_type + "sphinxcol";
+               // testsWithPrice
+
+
             }
             ViewBag.testSet = testSet;
 
@@ -1475,8 +1481,8 @@ namespace Lo.Controllers
                 Session["response"]  = "Invalid Token";
                 return Content("Invalid Token"); 
             } 
-            string response = null;  
-            response =  centralCalls.add_new_Inventory(Item_name: Item_name);
+            string response = null;
+            response = centralCalls.add_new_Inventory(Item_name: Item_name, lab: Session["Lab"].ToString());
             Session["response"]  = response;
             return Content((string)response);
         }
@@ -1528,7 +1534,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_Inventory("");
+            Session["response"] = centralCalls.get_Inventory(" where lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_Inventory>)Session["response"]) ));
         }
 
@@ -1618,10 +1624,8 @@ namespace Lo.Controllers
             return Content((string)response);
         }
 
-
-
         [AllowAnonymous]
-        public ActionResult new_Inventory_Movement()
+        public ActionResult new_Inventory_Movement_allocate()
         {
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1632,13 +1636,13 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
-            ViewBag.Data0 =  centralCalls.get_Inventory("");
-            ViewBag.Data1 =  centralCalls.get_authenticate_Staff("");
-            ViewBag.Data2 =  centralCalls.get_authenticate_Staff("");
+            ViewBag.Data0 = centralCalls.get_Inventory("SELECT id,CONCAT( item_name ,' (', IFNULL(q,0), ') ') item_name  , lab from lo_inventory a left JOIN (SELECT SUM(quantity * direction) q, inventory FROM lo_inventory_movement GROUP BY inventory  ) a1 ON a.id = a1.inventory where lab = " + Session["Lab"]);
+            ViewBag.Data1 = centralCalls.get_authenticate_Staff(" where a.lab = " + Session["Lab"]);
+            ViewBag.Data2 = centralCalls.get_authenticate_Staff(" where a.lab = " + Session["Lab"]);
             getStatus();
             return View();
         }
@@ -1647,7 +1651,7 @@ namespace Lo.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
-        public ActionResult new_Inventory_Movement(string Inventory,string Quantity,string Direction,string By_satff,string To_staff,string Move_date )
+        public ActionResult new_Inventory_Movement_allocate(string Inventory, string Quantity, string Direction, string By_satff, string To_staff, string Move_date)
         {  
                 Audit.protocol();
             if(Session["userType"] == null){ 
@@ -1658,7 +1662,8 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement' )   ").Count ==0){ 
+            if (centralCalls.get_role_right_Staff("  where role =  " + Session["role"] + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count == 0)
+            { 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1668,25 +1673,90 @@ namespace Lo.Controllers
                 {
                     Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
                 }
-                ActionResult xx =  add_Inventory_Movement(Inventory: Inventory,Quantity: Quantity,Direction: Direction,By_satff: By_satff,To_staff: To_staff,Move_date: Move_date,token: Session["token"].ToString() ,role: Session["role"].ToString()  ); 
+                ActionResult xx = add_Inventory_Movement(Inventory: Inventory, Quantity: Quantity, Direction: "-1", By_satff: Session["userID"].ToString(), To_staff: To_staff, Move_date: Move_date, token: Session["token"].ToString(), role: Session["role"].ToString()); 
                 if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
                     Session["status"] = "You do not have access to this functionality";
                     return RedirectToAction("Login", "Staff");
                 }
                 response = (string)Session["response"];
                 Session["status"] = response;
-                return RedirectToAction("new_Inventory_Movement", "Staff");
+                return RedirectToAction("new_Inventory_Movement_allocate", "Staff");
         } 
+
+
+
+
+        [AllowAnonymous]
+        public ActionResult new_Inventory_Movement_add()
+        {
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "Staff");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "Staff");
+            }
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){ 
+               Session["status"] = "You do not have access to this functionality";
+               return RedirectToAction("Login", "Staff");
+            }
+            ViewBag.Data0 = centralCalls.get_Inventory(" where lab = " + Session["Lab"]);
+            ViewBag.Data1 = centralCalls.get_authenticate_Staff(" where a.lab = " + Session["Lab"]);
+            ViewBag.Data2 = centralCalls.get_authenticate_Staff(" where a.lab = " + Session["Lab"]);
+            getStatus();
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "None")]
+        public ActionResult new_Inventory_Movement_add(string Inventory, string Quantity, string Direction, string By_satff, string To_staff, string Move_date)
+        {  
+                Audit.protocol();
+            if(Session["userType"] == null){ 
+               Session["status"] = "Session Timed out";
+               return RedirectToAction("Login", "Staff");
+            }
+            if(Session["status"].ToString() == "Please change your password")
+            {
+               return RedirectToAction("Change_Password", "Staff");
+            }
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){ 
+               Session["status"] = "You do not have access to this functionality";
+               return RedirectToAction("Login", "Staff");
+            }
+                
+                string response =null;
+                if (!validateAccessToken(Session["token"].ToString()))
+                {
+                    Session["token"] = doAuthenticate(userName: Session["email"].ToString(), password: Session["Password"].ToString(), clientID: "Staff");
+                }
+                ActionResult xx = add_Inventory_Movement(Inventory: Inventory, Quantity: Quantity, Direction: "1", By_satff: Session["userID"].ToString(), To_staff: To_staff, Move_date: Move_date, token: Session["token"].ToString(), role: Session["role"].ToString()); 
+                if( ((System.Web.Mvc.ContentResult)(xx)).Content=="You do not have access to this functionality"){ 
+                    Session["status"] = "You do not have access to this functionality";
+                    return RedirectToAction("Login", "Staff");
+                }
+                response = (string)Session["response"];
+                Session["status"] = response;
+                return RedirectToAction("new_Inventory_Movement_add", "Staff");
+        } 
+
 
         [AllowAnonymous]
         public ActionResult add_Inventory_Movement(string Inventory,string Quantity,string Direction,string By_satff,string To_staff,string Move_date,string token, string role)
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement' )   ").Count ==0){ 
-               Session["status"] = "You do not have access to this functionality";
-               Session["response"]  = "You do not have access to this functionality";
-               return Content(Session["status"].ToString() );
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){
+                if (centralCalls.get_role_right_Staff("  where role =  " + Session["role"] + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count == 0)
+                { 
+                   Session["status"] = "You do not have access to this functionality";
+                   Session["response"]  = "You do not have access to this functionality";
+                   return Content(Session["status"].ToString() );
+                }
             }
             if (!validateAccessToken(token)) 
             { 
@@ -1820,7 +1890,7 @@ namespace Lo.Controllers
                     return RedirectToAction("view_Inventory_Movement", "Staff");
                      return View();
                 }
-                return RedirectToAction("new_Inventory_Movement", "Staff");
+                return RedirectToAction("view_Inventory_Movement", "Staff");
         } 
 
         [AllowAnonymous]
@@ -1845,7 +1915,182 @@ namespace Lo.Controllers
             return Content((string)response);
         }
 
+        [AllowAnonymous]
+        public ActionResult receipt(string  id  , 
+            string Test_Date  , 
+            string  patient  , 
+            string price  )
+        {
 
+            Audit.protocol();
+            List<Lo_Tests_data> d =  centralCalls.get_Tests(" where a1.lab = " + Session["Lab"] + " and a.id = " + id);
+             List<Lo_Patient_data> p = centralCalls.get_Patient(" where a.id = " + d[0].Patient );
+
+             ViewBag.Data1 = centralCalls.get_Test_Type2(" where a.lab = " + Session["Lab"], id);
+             ViewBag.firstname = p[0].First_name;
+             ViewBag.email = p[0].Email;
+             ViewBag.dateValue = Test_Date;
+            ViewBag.totalBill = price;
+
+
+            ViewBag.id=id;
+            ViewBag.Test_Date=Test_Date;
+            ViewBag.patient=patient;
+            ViewBag.price=price;
+
+            return View();
+        }
+
+
+
+
+        [AllowAnonymous]
+
+        public ActionResult receipt1(string id,
+            string Test_Date,
+            string patient,
+            string price)
+        {//ExportInvoiceX_ receipt
+            Audit.protocol();
+
+            List<Lo_Tests_data> d = centralCalls.get_Tests(" where a1.lab = " + Session["Lab"] + " and a.id = " + id);
+            List<Lo_Patient_data> p = centralCalls.get_Patient(" where a.id = " + d[0].Patient);
+
+            ViewBag.Data1 = centralCalls.get_Test_Type2(" where a.lab = " + Session["Lab"], id);
+            ViewBag.firstname = p[0].First_name;
+            ViewBag.email = p[0].Email;
+            ViewBag.dateValue = Test_Date;
+            ViewBag.totalBill = price;
+
+            Session["ViewBag_Data1"] = ViewBag.Data1 ;
+            Session["ViewBag_firstname"] = ViewBag.firstname;
+            Session["ViewBag_email"] = ViewBag.email;
+            Session["ViewBag_dateValue"] = ViewBag.dateValue;
+            Session["ViewBag_totalBill"] = ViewBag.totalBill;
+            ViewBag.Lab_data = Session["Lab_data"];
+
+
+            Session["ViewBag.id"] = id;
+            Session["ViewBag.Test_Date"] = Test_Date;
+            Session["ViewBag.patient"] = patient;
+            Session["ViewBag.price"] = price;
+
+            //Session["email"] = email;
+            //Session["companyV"] = company;
+            //Session["firstname"] = firstname;
+            //Session["lastname"] = lastname;
+            //Session["noOfToken"] = noOfToken;
+            //Session["totalBill"] = totalBill;
+            //Session["modeOfPay"] = modeOfPay;
+            //Session["amount"] = amount;
+            //Session["testType"] = testType; 
+            //ViewBag.dateValue = dateValue;
+            //ViewBag.dateCOde = dateCOde; 
+            //ViewBag.email = email;
+            //ViewBag.company = company;
+            //ViewBag.firstname = firstname;
+            //ViewBag.lastname = lastname;
+            //ViewBag.noOfToken = noOfToken;
+            //ViewBag.totalBill = totalBill;
+            //ViewBag.modeOfPay = modeOfPay;
+            //ViewBag.amount = amount;
+            //ViewBag.testType = testType;
+
+
+
+            string strFileName = "Receipt_" + id + ".pdf";
+            //Session["dateCOde"] = dateCOde.Replace("_", "/");
+            //Session["dateValue"] = dateValue;
+            //ViewBag.dateCOde = Session["dateCOde"];
+            //ViewBag.dateValue = Session["dateValue"];
+            Session["strFileName"] = strFileName;
+            ViewBag.strFileName = Session["strFileName"];
+
+            return new Rotativa.ViewAsPdf("receipt0", "") { FileName = strFileName };
+
+        }
+        public ActionResult receipt0()
+        {//ExportInvoiceX receipt0
+           
+
+            Audit.protocol();
+            return View();
+        }
+
+
+
+        public ActionResult receipt2(string id,
+            string Test_Date,
+            string patient,
+            string price)
+        {//ExportInvoiceXX_ receipt0
+            Audit.protocol();
+
+
+
+            List<Lo_Tests_data> d = centralCalls.get_Tests(" where a1.lab = " + Session["Lab"] + " and a.id = " + id);
+            List<Lo_Patient_data> p = centralCalls.get_Patient(" where a.id = " + d[0].Patient);
+
+            ViewBag.Data1 = centralCalls.get_Test_Type2(" where a.lab = " + Session["Lab"], id);
+            ViewBag.firstname = p[0].First_name;
+            ViewBag.email = p[0].Email;
+            ViewBag.dateValue = Test_Date;
+            ViewBag.totalBill = price;
+            ViewBag.Lab_data =   Session["Lab_data"];
+
+            Session["ViewBag_Data1"] = ViewBag.Data1;
+            Session["ViewBag_firstname"] = ViewBag.firstname;
+            Session["ViewBag_email"] = ViewBag.email;
+            Session["ViewBag_dateValue"] = ViewBag.dateValue;
+            Session["ViewBag_totalBill"] = ViewBag.totalBill;
+
+
+            //Session["email"] = email;
+            //Session["companyV"] = company;
+            //Session["firstname"] = firstname;
+            //Session["lastname"] = lastname;
+            //Session["noOfToken"] = noOfToken;
+            //Session["totalBill"] = totalBill;
+            //Session["modeOfPay"] = modeOfPay;
+            //Session["amount"] = amount;
+            //Session["testType"] = testType;
+
+
+
+            //ViewBag.dateValue = dateValue;
+            //ViewBag.dateCOde = dateCOde;
+
+
+            //ViewBag.email = email;
+            //ViewBag.company = company;
+            //ViewBag.firstname = firstname;
+            //ViewBag.lastname = lastname;
+            //ViewBag.noOfToken = noOfToken;
+            //ViewBag.totalBill = totalBill;
+            //ViewBag.modeOfPay = modeOfPay;
+            //ViewBag.amount = amount;
+            //ViewBag.testType = testType;
+
+
+
+            // string dateCOde = System.DateTime.Now.ToString("MMddyyyy_hhmmss_fff");
+            // string dateValue = System.DateTime.Now.ToString("dd/MMM/yyyy");
+            string strFileName = Server.MapPath("~/Receipt_" + id + ".pdf");
+            Session["strFileName"] = strFileName;
+            ViewBag.strFileName = Session["strFileName"];
+            var x = new Rotativa.ViewAsPdf("receipt0", "") { FileName = strFileName };
+            var byteArray = x.BuildPdf(ControllerContext);
+            System.IO.File.WriteAllBytes(strFileName, byteArray);
+
+
+
+            string mailSubject = "Receipt " + Session["Lab_data"];
+            string mailBody = "Hi " + p[0].First_name + "<br><br>Please find attached your receipt<br><br><br>Regards<br><br>";
+            Audit.SendMail(p[0].Email, mailSubject, mailBody, "add profile", strFileName);
+
+            return RedirectToAction("view_Patient_Tests", "staff");
+
+        }
    
     }
 } 

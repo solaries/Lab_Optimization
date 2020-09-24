@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@{
+    List<Lo.Models.Lo_Test_Type_data> data1 = (List<Lo.Models.Lo_Test_Type_data>)@ViewBag.data1;
+}
+
+@{
+    int sn = 0;
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- main css -->
+    <link rel="stylesheet" href="~/css/css.css">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+
+
+    <link href="~/assets/plugins/sweetalert/css/sweetalert.css" rel="stylesheet">
+    <script src="~/assets/plugins/sweetalert/js/sweetalert.min.js"></script>
+    <title>Invoice</title>
+    <style>
+    </style>
+</head>
+
+<div id="invoice">
+
+
+
+    <div class="toolbar hidden-print">
+        <div class="text-right">
+            <button onclick="printDocument3( )" id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Back</button>
+            <button onclick="printDocument2( )" id="printInvoice" class="btn btn-info"><i class="fa fa-print"></i> Send as email</button>
+            <button onclick="printDocument( )" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Export as PDF</button>
+        </div>
+        <hr>
+    </div>
+    <div class="invoice overflow-auto">
+        <div style="min-width: 600px">
+            <header>
+                <div class="row">
+                    <div class="col">
+                        <a target="_blank" href="#">
+                            <!--
+                            <img src="~/img/lab.jpg" data-holder-rendered="true" />
+                                -->
+                        </a>
+                    </div>
+                    <div class="col company-details">
+                        <h2 class="name">
+                            <a target="_blank" href="">
+                                @Session["Lab_data"]
+                            </a>
+                        </h2>
+                        <div></div>
+                        <div> <br> <br> </div>
+                    </div>
+                </div>
+            </header>
+            <main>
+                <div class="row contacts">
+                    <div class="col invoice-to">
+                        <div class="text-gray-light">RECEIPT FOR:</div>
+                        <h2 class="to">@ViewBag.firstname </h2> 
+                        <div class="email"><a href="mailto:@ViewBag.email">@ViewBag.email</a></div>
+                    </div>
+                    <div class="col invoice-details">
+                        <h1 class="invoice-id"></h1>
+                        <div class="date">Date: @ViewBag.dateValue</div>
+                        @*<div class="date">Due Date: 30/10/2018</div>
+
+
+
+                            ViewBag.dateValue = dateValue;
+                            ViewBag.dateCOde = dateCOde;
+
+
+                            ViewBag.email = email;
+                            ViewBag.company  =  company;
+                            ViewBag.firstname  =  firstname;
+                            ViewBag.lastname  = lastname ;
+                            ViewBag.noOfToken  = noOfToken ;
+                            ViewBag.totalBill  = totalBill ;
+                            ViewBag.modeOfPay  = modeOfPay ;
+                            ViewBag.amount = amount;
+
+                        *@
+                    </div>
+                </div>
+                <table border="0" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th class="text-left">DESCRIPTION</th>
+                            <th class="text-right">AMOUNT</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                 
+
+
+                        @foreach (var item in data1)
+                        {
+                            ++sn;
+                            <tr>
+
+                                <td class="no">@sn</td> 
+                                <td class="text-left">@Html.DisplayFor(modelItem => item.Test_name)</td>
+                                <td class="unit">@Html.DisplayFor(modelItem => item.Price)</td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        
+                        <tr> 
+                            <td colspan="2">GRAND TOTAL</td>
+                            <td>₦ @ViewBag.totalBill</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="thanks">Thank you!</div>
+                <div>
+                   
+                    
+                </div>
+                <br><br><br>
+        
+            </main>
+         
+        </div>
+        <!--DO NOT DELETE THIS div. IT is responsible for showing footer always at the bottom-->
+        <div></div>
+    </div>
+</div>
+
+<script>
+    function printDocument(documentId) {
+
+
+        location = location.toString().toLowerCase().split("staff")[0] + "staff/receipt1?id=@ViewBag.id" +
+          "&Test_Date=@ViewBag.Test_Date" +
+          "&patient=@ViewBag.patient" +
+          "&price=@ViewBag.price"  ;
+
+    }
+    function printDocument2(documentId) {
+        // alert(location);
+
+        //alert(location.split("ExportInvoice").join("ExportInvoiceX_"));
+        location = location.toString().toLowerCase().split("staff")[0] + "staff/receipt2?id=@ViewBag.id" +
+            "&Test_Date=@ViewBag.Test_Date" +
+            "&patient=@ViewBag.patient" +
+            "&price=@ViewBag.price" ;
+
+    }
+    function printDocument3(documentId) {
+        location = location.toString().toLowerCase().split("staff")[0] + "Staff/view_Patient_Tests";
+
+
+    }
+
+    function msg(txt) {
+        sweetAlert("...", txt, "info");
+    }
+
+
+    var statusMessage = "@ViewBag.status" || false;
+
+
+    if (statusMessage != false && statusMessage.length > 0) {
+        msg(statusMessage);
+
+    }
+
+</script>

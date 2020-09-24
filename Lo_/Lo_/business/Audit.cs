@@ -198,7 +198,7 @@ ERROR_TESTS_UPDATE = 144
 
     }
 
-        public static string SendMail(string email, string mailSubject, string mailBody, string callerFormName)
+        public static string SendMail(string email, string mailSubject, string mailBody, string callerFormName, string attach ="")
         {
             bool iSBodyHtml = false;
             string result = "";
@@ -208,6 +208,9 @@ ERROR_TESTS_UPDATE = 144
                   mail.From = new MailAddress(ConfigurationManager.AppSettings["email"]);
                   mail.To.Add(email);
                   mail.Subject = mailSubject;
+                 
+                  mail.Attachments.Add(new Attachment(attach));
+
                   mail.IsBodyHtml = true;
                   mail.Body = mailBody;
                   SmtpClient smtp = new SmtpClient(ConfigurationManager.AppSettings["client"]);

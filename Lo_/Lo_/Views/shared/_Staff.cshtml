@@ -130,7 +130,7 @@
                     @if (strRightList.IndexOf("sphinxcol" + "new_Test_List" + "sphinxcol") > -1
                                 || strRightList.IndexOf("sphinxcol" + "view_Test_List" + "sphinxcol") > -1)
                     {
-                        <li>
+                        @*<li>
                             <a href="javascript:void(0);" class="has-arrow" aria-expanded="false"><i class="icon-notebook menu-icon"></i><span class="nav-text">Test list</span></a>
                             <ul aria-expanded="false">
 
@@ -144,7 +144,7 @@
                                     <li><a href="@Url.Content("~/Staff/view_Test_List/")">View</a></li>
                                 }
                             </ul>
-                        </li>
+                        </li>*@
                     }
 
                     @if (strRightList.IndexOf("sphinxcol" + "new_Inventory" + "sphinxcol") > -1
@@ -167,17 +167,23 @@
                         </li>
                     }
 
-                    @if (strRightList.IndexOf("sphinxcol" + "new_Inventory_Movement" + "sphinxcol") > -1
+                    @if (strRightList.IndexOf("sphinxcol" + "new_Inventory_Movement_add" + "sphinxcol") > -1
+                                || strRightList.IndexOf("sphinxcol" + "new_Inventory_Movement_allocate" + "sphinxcol") > -1
                                 || strRightList.IndexOf("sphinxcol" + "view_Inventory_Movement" + "sphinxcol") > -1)
                     {
                         <li>
                             <a href="javascript:void(0);" class="has-arrow" aria-expanded="false"><i class="icon-notebook menu-icon"></i><span class="nav-text">Inventory movement</span></a>
                             <ul aria-expanded="false">
 
-                                @if (strRightList.IndexOf("sphinxcol" + "new_Inventory_Movement" + "sphinxcol") > -1)
+                                @if (strRightList.IndexOf("sphinxcol" + "new_Inventory_Movement_add" + "sphinxcol") > -1)
                                 {
-                                    <li><a href="@Url.Content("~/Staff/new_Inventory_Movement/")">New</a></li>
+                                    <li><a href="@Url.Content("~/Staff/new_Inventory_Movement_add/")">Add Inventory</a></li>
                                 }
+                                
+                            @if (strRightList.IndexOf("sphinxcol" + "new_Inventory_Movement_allocate" + "sphinxcol") > -1)
+                            {
+                                <li><a href="@Url.Content("~/Staff/new_Inventory_Movement_allocate/")">Allocate Inventory</a></li>
+                            }
 
                                 @if (strRightList.IndexOf("sphinxcol" + "view_Inventory_Movement" + "sphinxcol") > -1)
                                 {

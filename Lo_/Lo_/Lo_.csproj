@@ -76,6 +76,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Rotativa">
+      <HintPath>..\..\..\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
     </Reference>
@@ -5055,11 +5058,14 @@
     <Content Include="assets\plugins\x-editable\dist\bootstrap3-editable\img\loading.gif" />
     <Content Include="assets\plugins\x-editable\dist\bootstrap3-editable\js\bootstrap-editable.min.js" />
     <Content Include="assets\plugins\xml\plugin.js" />
+    <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\css.css" />
     <Content Include="data\Database.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Database.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -5398,7 +5404,7 @@
     <Content Include="Views\Staff\new_Inventory.cshtml" />
     <Content Include="Views\Staff\view_Inventory.cshtml" />
     <Content Include="Views\Staff\edit_Inventory.cshtml" />
-    <Content Include="Views\Staff\new_Inventory_Movement.cshtml" />
+    <Content Include="Views\Staff\new_Inventory_Movement_add.cshtml" />
     <Content Include="Views\Staff\view_Inventory_Movement.cshtml" />
     <Content Include="Views\Staff\edit_Inventory_Movement.cshtml" />
     <Content Include="Views\SuperAdmin\login.cshtml" />
@@ -5412,6 +5418,9 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\shared\_Admin.cshtml" />
     <Content Include="Views\shared\_Staff.cshtml" />
+    <Content Include="Views\Staff\receipt.cshtml" />
+    <Content Include="Views\Staff\receipt0.cshtml" />
+    <Content Include="Views\Staff\new_Inventory_Movement_allocate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

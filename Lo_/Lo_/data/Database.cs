@@ -471,6 +471,14 @@ namespace Lo.Data.Models
          set { _Id = value; Track("id"); }  
       }  
      long _Id;  
+
+     [Column("lab")]  
+     public long Lab  
+     {
+         get { return _Lab; }
+         set { _Lab = value; Track("lab"); }  
+      }
+     long _Lab; 
     
      [Column("item_name")]  
      public  string   Item_name  

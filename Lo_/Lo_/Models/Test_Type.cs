@@ -68,6 +68,12 @@ namespace Lo.Models
              var actual = context.Fetch<Lo_Test_Type_data>("select a.id , a2.id id2, a.test_name , a2.price , a.lab , a1.Lab  lab_data    from Lo_Test_Type a  inner join  Lo_Lab a1 on a.lab = a1.id inner join  (SELECT * from lo_test_type_price WHERE id IN ( SELECT id FROM (SELECT MAX(id) id,test_type FROM lo_test_type_price GROUP BY test_type  ) a )) a2 on a.id = a2.test_type" + sql);
              return actual;
          }  
+         public List<Lo_Test_Type_data> get_Test_Type_linked2(string sql, string id)
+         {
+             var context = Lo.Data.Models.Lo.GetInstance();
+             var actual = context.Fetch<Lo_Test_Type_data>("select a.id , a2.id id2, a.test_name , a2.price , a.lab , a1.Lab  lab_data    from Lo_Test_Type a   inner join  Lo_Lab a1 on a.lab = a1.id  inner join  (SELECT * from lo_test_type_price WHERE id IN  ( SELECT test_type FROM lo_test_list  WHERE test = " + id + ")) a2 on a.id = a2.test_type" + sql);
+             return actual;
+         }  
          public List<Lo_Test_Type> get_Test_Type(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();

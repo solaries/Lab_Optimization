@@ -36,6 +36,7 @@
                             <tr>
                                 <th>   </th>
                                 <th>Test Type</th>
+                                <th>Price</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,9 +44,10 @@
                             {
                                 <tr>
                                     <td>
-                                        <input type="checkbox" onclick="setRight(@item.Id2)" />
+                                        <input type="checkbox" onclick="setRight(@item.Id2, @item.Price)" />
                                     </td>
                                     <td>@Html.DisplayFor(modelItem => item.Test_name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Price)</td>
                                 </tr>
                             }
                         </tbody>
@@ -53,6 +55,7 @@
                             <tr>
                                 <th>   </th>
                                 <th>Test Type</th>
+                                <th>Price</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -60,6 +63,7 @@
 
                 <input id="Test_date" name="Test_date" value="." type="hidden" />
                 <input id="selectedTests" name="selectedTests" value="" type="hidden" />
+                <input id="selectedTestsWithPrice" name="selectedTestsWithPrice" value="" type="hidden" />
 
 
                 @*<div class="form-group row">
@@ -69,6 +73,12 @@
                      placeholder="Test Date" />
                      </div>
               </div>*@
+                <div class="form-group row">
+                    <label class="col-lg-4 col-form-label">Total Bill</label>
+                    <div class="col-lg-6">
+                        <input id="totalBill" name="totalBill" required type="text" class="form-control"  readonly placeholder="Total Bill" />
+                    </div>
+                </div>
 
                 <div class="form-group row">
                     <div class="col-lg-8 ml-auto">
@@ -80,16 +90,37 @@
     </div>
 </div>
 <script> 
-    var selectedRights = ""; 
-    function setRight(id) { 
-        selectedRights = document.getElementById("selectedTests").value;  
+    var selectedRights = "";
+    var selectedTestsWithPrice = "";
+    function setRight(id,price) { 
+        selectedRights = document.getElementById("selectedTests").value;
+        selectedTestsWithPrice = document.getElementById("selectedTestsWithPrice").value;
         if (selectedRights.indexOf("sphinxcol" + id + "sphinxcol") > -1) { 
             selectedRights = selectedRights.split("sphinxcol" + id + "sphinxcol").join(""); 
         } 
         else { 
             selectedRights += "sphinxcol" + id + "sphinxcol"; 
-        } 
+        }
+        if (selectedTestsWithPrice.indexOf("sphinxcol" + id + "sphinxnext" + price + "sphinxcol") > -1) {
+            selectedTestsWithPrice = selectedTestsWithPrice.split("sphinxcol" + id + "sphinxnext" + price + "sphinxcol").join("");
+        }
+        else {
+            selectedTestsWithPrice += "sphinxcol" + id + "sphinxnext" + price + "sphinxcol";
+        }
+        var theList = selectedTestsWithPrice.split("sphinxcol");
+        var i = 0;
+        var total = 0;
+        for (i = 0; i < theList.length; i++) {
+            if (theList[i].length > 0) {
+                total += parseFloat(theList[i].split("sphinxnext")[1]);
+            }
+        }
+
+
+        document.getElementById("totalBill").value = total;
+        doCleanNumber(document.getElementById("totalBill"));
         document.getElementById("selectedTests").value = selectedRights;
+        document.getElementById("selectedTestsWithPrice").value = selectedTestsWithPrice;
     } 
     function doClean(text) { 
         text.value = text.value.split("'").join("");
@@ -168,14 +199,20 @@
             textBox.value = strVal2 + strVal;
         } 
     function checkAndGo() { 
-                 if (document.getElementById("Patient").value.trim().length == 0) {
+        if (document.getElementById("Patient").value.trim().length == 0) {
              msg("Please select patient");
              return;
          } 
          if (document.getElementById("Test_date").value.trim().length == 0) {
              msg("Please enter Test Date");
              return;
-         } 
+         }
+         
+         if (document.getElementById("selectedTests").value.trim().length == 0) {
+             msg("Please select atleast one Test Type");
+             return;
+         }
+
 
         document.getElementById("widgetu1290").submit(); 
     } 

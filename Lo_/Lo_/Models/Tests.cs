@@ -82,7 +82,7 @@ namespace Lo.Models
          public List<Lo_Tests_data> get_Tests_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_Tests_data>( "select a.id , a.patient , a1.first_name  patient_data  , a.Test_Date   from Lo_Tests a  inner join  Lo_Patient a1 on a.patient = a1.id "  + sql);
+             var actual = context.Fetch<Lo_Tests_data>("select a.id ,a2.price , a.patient , a1.first_name  patient_data  , a.Test_Date   from Lo_Tests a  inner join  Lo_Patient a1 on a.patient = a1.id INNER JOIN (SELECT Test, sum(price) price from lo_test_list a  INNER JOIN lo_tests a1 ON a.Test = a1.id INNER JOIN lo_test_type_price a2 ON a2.id = a.Test_Type GROUP BY test ) a2 ON a2.test = a.id " + sql);
              return actual;
          }  
          public List<Lo_Tests> get_Tests(string sql)
@@ -101,6 +101,18 @@ namespace Lo.Models
         set { _Id = value;  }  
     }  
     long _Id;
+
+
+
+    [Column("price")]
+    public float Price
+    {
+        get { return _Price; }
+        set { _Price = value; }
+    }
+    float _Price;  
+
+
     [Column("patient")]  
     public string Patient  
     {  
