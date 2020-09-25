@@ -5109,9 +5109,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
-    <Content Include="data\Database.Core.ttinclude" />
-    <Content Include="data\Database.Generator.ttinclude" />
+    <Content Include="packages.config" /> 
     <Content Include="assets\css\style.css.map" />
     <Content Include="assets\icons\cryptocoins\fonts\cryptocoins.ttf" />
     <Content Include="assets\icons\cryptocoins\fonts\cryptocoins.woff" />
@@ -5421,6 +5419,7 @@
     <Content Include="Views\Staff\receipt.cshtml" />
     <Content Include="Views\Staff\receipt0.cshtml" />
     <Content Include="Views\Staff\new_Inventory_Movement_allocate.cshtml" />
+    <None Include="Properties\PublishProfiles\lo.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

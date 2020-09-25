@@ -56,4 +56,3 @@ C:\code\Lab_Optimization\Lo_\Lo_\bin\System.Web.Http.WebHost.xml
 C:\code\Lab_Optimization\Lo_\Lo_\obj\Debug\Lab Optimum.dll
 C:\code\Lab_Optimization\Lo_\Lo_\obj\Debug\Lab Optimum.pdb
 C:\code\Lab_Optimization\Lo_\Lo_\bin\Rotativa.dll
-C:\code\Lab_Optimization\Lo_\Lo_\obj\Debug\Lo_.csprojResolveAssemblyReference.cache

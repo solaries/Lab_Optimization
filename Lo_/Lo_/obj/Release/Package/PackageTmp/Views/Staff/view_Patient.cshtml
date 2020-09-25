@@ -1,0 +1,69 @@
+@model IEnumerable<Lo.Models.Lo_Patient_data>
+ 
+ 
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">View Patient</h4> 
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered zero-configuration">
+                <thead>
+                    <tr>
+                        <th>   </th> 
+                        <th>first name</th>
+                        <th>Surname</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                        <th>Date Of Birth</th>
+                        <th>lab</th>
+ 
+                    </tr> 
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>                            
+                            <td>@Html.ActionLink("Select", "edit_Patient", new
+                           {
+                            id=item.Id, 
+                            lab = item.Lab
+                            ,Date_Of_Birth = item.Date_of_birth
+                            ,Email = item.Email
+                            ,Phone_number = item.Phone_number
+                            ,Surname = item.Surname
+                            ,first_name = item.First_name
+                               })</td> 
+                           <td>@Html.DisplayFor(modelItem => item.First_name)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Surname)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Phone_number)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Date_of_birth)</td>
+                           <td>@Html.DisplayFor(modelItem => item.Lab_data)</td>
+                        </tr>
+                    }
+                    
+                </tbody>
+                <tfoot>
+                    <tr>                        
+                        <th>   </th> 
+                        <th>first name</th>
+                        <th>Surname</th>
+                        <th>Phone number</th>
+                        <th>Email</th>
+                        <th>Date Of Birth</th>
+                        <th>lab</th>
+ 
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div> 
+<script> 
+    function msg(txt) {
+        sweetAlert("...", txt, "info");
+    }
+    var statusMessage = "@ViewBag.status" || false; 
+    if (statusMessage != false && statusMessage.length > 0) {
+        msg(statusMessage); 
+    }
+</script>

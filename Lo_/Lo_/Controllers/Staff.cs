@@ -1817,7 +1817,7 @@ namespace Lo.Controllers
                 return Content("Invalid Token"); 
             } 
             getStatus();
-            Session["response"] = centralCalls.get_Inventory_Movement("");
+            Session["response"] = centralCalls.get_Inventory_Movement(" where a1.lab = " + Session["Lab"]);
             return Content(JsonConvert.SerializeObject( ((List<Lo_Inventory_Movement_data>)Session["response"]) ));
         }
 

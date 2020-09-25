@@ -38,8 +38,12 @@ namespace Lo.BusinessLogic
                  data += ",Last_name : " + Last_name;
                 cust.Email =  Email;
                  data += ",Email : " + Email;
+                 
+                List<Lo_role_Admin_data> ra =  get_role_Admin(" where a.lab = " + Lab + " order by id asc");
+                Role = ra[0].Id.ToString();
                 cust.Role =  long.Parse( Role == null ? "1" : Role)  ;
                  data += ",Role : " + Role;
+
                 cust.Lab =  long.Parse( Lab == null ? "1" : Lab)  ;
                  data += ",Lab : " + Lab;
                     cust.Password =  Encoding.ASCII.GetBytes( Password);
@@ -95,7 +99,11 @@ namespace Lo.BusinessLogic
                  data += ",Last_name : " + oLast_name + " -> " + Last_name;
                  cust.Email =  Email;
                  data += ",Email : " + oEmail + " -> " + Email;
-                 cust.Role =  long.Parse( Role == null ? "1" : Role)  ;
+
+                 List<Lo_role_Admin_data> ra = get_role_Admin(" where a.lab = " + Lab + " order by id asc");
+                 Role = ra[0].Id.ToString();
+
+                 cust.Role = long.Parse(Role == null ? "1" : Role);
                  data += ",Role : " + oRole + " -> " + Role;
                  cust.Lab =  long.Parse( Lab == null ? "1" : Lab)  ;
                  data += ",Lab : " + oLab + " -> " + Lab;
@@ -488,7 +496,7 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static string add_new_Lab(string Lab, bool returnID = false )
+        public static string add_new_Lab(string Lab, bool returnID = false  )
         { 
             string response = ""; 
             Lab c = new Lab();  
