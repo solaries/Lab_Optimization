@@ -208,8 +208,12 @@ ERROR_TESTS_UPDATE = 144
                   mail.From = new MailAddress(ConfigurationManager.AppSettings["email"]);
                   mail.To.Add(email);
                   mail.Subject = mailSubject;
-                 
-                  mail.Attachments.Add(new Attachment(attach));
+
+                  if (attach.Trim().Length > 0)
+                  {
+                        mail.Attachments.Add(new Attachment(attach));
+
+                  }
 
                   mail.IsBodyHtml = true;
                   mail.Body = mailBody;

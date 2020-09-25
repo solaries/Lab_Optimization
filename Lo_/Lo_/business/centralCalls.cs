@@ -271,8 +271,9 @@ namespace Lo.BusinessLogic
             }
             return response;
         }
-        public static List<Lo_authenticate_SuperAdmin> get_authenticate_SuperAdmin(string sql)
-        { 
+        public static List<Lo_authenticate_SuperAdmin> get_authenticate_SuperAdmin(string sql, out string msg )
+        {
+            msg = "";
             List<Lo_authenticate_SuperAdmin> response = null;
             try
             { 
@@ -281,6 +282,7 @@ namespace Lo.BusinessLogic
             }
             catch (Exception d)
             {
+                msg = d.Message;
                 Audit.InsertAudit((int)eventzz.ERROR_AUTHENTICATE_SUPERADMIN_GET, d.Message + "  " + (d.InnerException != null ? d.InnerException.Message : ""), getVal(), true); 
             }  
             return response;

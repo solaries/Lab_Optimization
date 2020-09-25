@@ -133,7 +133,7 @@ namespace Lo.Data.Models
 			}		
 		}	
 	}
-	 [TableName("Lo_event")]
+	 [TableName("lo_event")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class @Event : Lo.Record<@Event>
@@ -159,7 +159,7 @@ namespace Lo.Data.Models
                 if (columns != null)
                     sql.Select(columns);
 
-                sql.From("Lo_event (NOLOCK)");
+                sql.From("lo_event (NOLOCK)");
 
 
 				if (Id != null)
@@ -169,7 +169,7 @@ namespace Lo.Data.Models
                 return db.Query<@Event>(sql);
             }
 
-		} [TableName("Lo_eventLog")]
+		} [TableName("lo_eventlog")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class EventLog : Lo.Record<EventLog>
@@ -219,7 +219,7 @@ namespace Lo.Data.Models
                 if (columns != null)
                     sql.Select(columns);
 
-                sql.From("Lo_eventLog (NOLOCK)");
+                sql.From("lo_eventlog (NOLOCK)");
 
 
 				if (Id != null)
@@ -229,7 +229,7 @@ namespace Lo.Data.Models
                 return db.Query<EventLog>(sql);
             }
 
-		} [TableName("Lo_authenticate_Admin")]
+		} [TableName("lo_authenticate_admin")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_authenticate_Admin : Lo.Record<Lo_authenticate_Admin>
@@ -302,7 +302,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_authenticate_Admin (NOLOCK)");  
+     sql.From("lo_authenticate_admin (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -311,7 +311,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_authenticate_Staff")]
+ [TableName("lo_authenticate_staff")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_authenticate_Staff : Lo.Record<Lo_authenticate_Staff>
@@ -384,7 +384,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_authenticate_Staff (NOLOCK)");  
+     sql.From("lo_authenticate_staff (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -393,7 +393,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_authenticate_SuperAdmin")]
+ [TableName("lo_authenticate_superadmin")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_authenticate_SuperAdmin : Lo.Record<Lo_authenticate_SuperAdmin>
@@ -450,7 +450,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_authenticate_SuperAdmin (NOLOCK)");  
+     sql.From("lo_authenticate_superadmin (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -459,7 +459,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_Inventory")]
+ [TableName("lo_inventory")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Inventory : Lo.Record<Lo_Inventory>
@@ -492,7 +492,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Inventory (NOLOCK)");  
+     sql.From("lo_inventory (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -501,7 +501,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_Inventory_Movement")]
+ [TableName("lo_inventory_movement")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Inventory_Movement : Lo.Record<Lo_Inventory_Movement>
@@ -566,7 +566,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Inventory_Movement (NOLOCK)");  
+     sql.From("lo_inventory_movement (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -575,7 +575,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_Lab")]
+ [TableName("lo_lab")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Lab : Lo.Record<Lo_Lab>
@@ -600,7 +600,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Lab (NOLOCK)");  
+     sql.From("lo_lab (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -609,7 +609,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_Patient")]
+ [TableName("lo_patient")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Patient : Lo.Record<Lo_Patient>
@@ -674,7 +674,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Patient (NOLOCK)");  
+     sql.From("lo_patient (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -683,7 +683,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_right_Admin")]
+ [TableName("lo_right_admin")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_right_Admin : Lo.Record<Lo_right_Admin>
@@ -708,7 +708,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_right_Admin (NOLOCK)");  
+     sql.From("lo_right_admin (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -717,7 +717,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_right_Staff")]
+ [TableName("lo_right_staff")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_right_Staff : Lo.Record<Lo_right_Staff>
@@ -742,7 +742,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_right_Staff (NOLOCK)");  
+     sql.From("lo_right_staff (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -751,7 +751,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_role_Admin")]
+ [TableName("lo_role_admin")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_role_Admin : Lo.Record<Lo_role_Admin>
@@ -784,7 +784,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_role_Admin (NOLOCK)");  
+     sql.From("lo_role_admin (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -793,7 +793,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_role_right_Admin")]
+ [TableName("lo_role_right_admin")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_role_right_Admin : Lo.Record<Lo_role_right_Admin>
@@ -826,7 +826,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_role_right_Admin (NOLOCK)");  
+     sql.From("lo_role_right_admin (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -835,7 +835,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_role_right_Staff")]
+ [TableName("lo_role_right_staff")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_role_right_Staff : Lo.Record<Lo_role_right_Staff>
@@ -868,7 +868,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_role_right_Staff (NOLOCK)");  
+     sql.From("lo_role_right_staff (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -877,7 +877,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_role_Staff")]
+ [TableName("lo_role_staff")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_role_Staff : Lo.Record<Lo_role_Staff>
@@ -910,7 +910,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_role_Staff (NOLOCK)");  
+     sql.From("lo_role_staff (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -919,7 +919,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_Test_List")]
+ [TableName("lo_test_list")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Test_List : Lo.Record<Lo_Test_List>
@@ -952,7 +952,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Test_List (NOLOCK)");  
+     sql.From("lo_test_list (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -961,7 +961,7 @@ namespace Lo.Data.Models
   }
 
 
- [TableName("Lo_Test_Type")]
+ [TableName("lo_test_type")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Test_Type : Lo.Record<Lo_Test_Type>
@@ -1002,7 +1002,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Test_Type (NOLOCK)");  
+     sql.From("lo_test_type (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   
@@ -1012,7 +1012,7 @@ namespace Lo.Data.Models
 
 
 
- [TableName("Lo_Test_Type_Price")]
+ [TableName("lo_test_type_price")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Test_Type_Price : Lo.Record<Lo_Test_Type_Price>
@@ -1064,7 +1064,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);
-     sql.From("Lo_Test_Type_Price (NOLOCK)");  
+     sql.From("lo_test_type_price (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
 
@@ -1072,7 +1072,7 @@ namespace Lo.Data.Models
      }
   }
 
- [TableName("Lo_Tests")]
+ [TableName("lo_tests")]
  [PrimaryKey("id")]
  [ExplicitColumns]
  public partial class Lo_Tests : Lo.Record<Lo_Tests>
@@ -1105,7 +1105,7 @@ namespace Lo.Data.Models
   
      var sql = new Sql();
      if (columns != null)        sql.Select(columns);  
-     sql.From("Lo_Tests (NOLOCK)");  
+     sql.From("lo_tests (NOLOCK)");  
        if (Id != null)
             sql.Where("id IN (@0)", Id);
   

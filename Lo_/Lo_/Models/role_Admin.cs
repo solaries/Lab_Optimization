@@ -69,7 +69,7 @@ namespace Lo.Models
          public List<Lo_role_Admin_data> get_role_Admin_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_role_Admin_data>( "select a.id , a.roleName , a.lab , a1.Lab  lab_data    from Lo_role_Admin a  inner join  Lo_Lab a1 on a.lab = a1.id "  + sql);
+             var actual = context.Fetch<Lo_role_Admin_data>( "select a.id , a.roleName , a.lab , a1.Lab  lab_data    from lo_role_admin a  inner join  lo_lab a1 on a.lab = a1.id "  + sql);
              return actual;
          }  
          public List<Lo_role_Admin> get_role_Admin(string sql)

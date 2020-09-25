@@ -48,7 +48,7 @@ namespace Lo.Models
          public List<Lo_authenticate_Staff_data> get_authenticate_Staff_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_authenticate_Staff_data>( "select a.id , a.first_name , a.last_name , a.email , a.role , a1.roleName  role_data  , a.password , a.password2 , a.lab , a2.Lab  lab_data    from Lo_authenticate_Staff a  inner join  Lo_role_Staff a1 on a.role = a1.id  inner join  Lo_Lab a2 on a.lab = a2.id "  + sql);
+             var actual = context.Fetch<Lo_authenticate_Staff_data>( "select a.id , a.first_name , a.last_name , a.email , a.role , a1.roleName  role_data  , a.password , a.password2 , a.lab , a2.Lab  lab_data    from lo_authenticate_staff a  inner join  lo_role_staff a1 on a.role = a1.id  inner join  lo_lab a2 on a.lab = a2.id "  + sql);
              return actual;
          }  
          public List<Lo_authenticate_Staff> get_authenticate_Staff(string sql)

@@ -132,7 +132,7 @@ namespace Lo.Controllers
                             Session["Lab_data"] = response[0].Lab_data;
                             Session["token"] = token;
                             Session["Password"] = Password;
-                            List<Lo_right_Staff> rightList = centralCalls.get_right_Staff(" where id in (select `right` from Lo_role_right_Staff where role =" + response[0].Role.ToString() + " )   order by rightname");
+                            List<Lo_right_Staff> rightList = centralCalls.get_right_Staff(" where id in (select `right` from lo_role_right_staff where role =" + response[0].Role.ToString() + " )   order by rightname");
                             string strRightList = "";
                             foreach (Lo_right_Staff right in rightList)
                             {
@@ -156,7 +156,7 @@ namespace Lo.Controllers
                             Session["token"] = token;
                             Session["Password"] = Password;
                             Session["role"] = response[0].Role;
-                            List<Lo_right_Staff> rightList = centralCalls.get_right_Staff(" where id in (select `right` from Lo_role_right_Staff where role =" + response[0].Role.ToString() + " )   order by rightname");
+                            List<Lo_right_Staff> rightList = centralCalls.get_right_Staff(" where id in (select `right` from lo_role_right_staff where role =" + response[0].Role.ToString() + " )   order by rightname");
                             string strRightList = "";
                             foreach (Lo_right_Staff right in rightList)
                             {
@@ -287,7 +287,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -312,7 +312,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -337,7 +337,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -366,7 +366,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -389,7 +389,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_role_Staff>(); 
                return Content(Session["status"].ToString() );
@@ -418,7 +418,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -453,7 +453,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -495,7 +495,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Roles' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Roles' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -526,7 +526,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -549,7 +549,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -574,7 +574,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -603,7 +603,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -626,7 +626,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_Test_Type>(); 
                return Content(Session["status"].ToString() );
@@ -654,7 +654,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -682,7 +682,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -713,7 +713,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Test Type' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Test Type' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -744,7 +744,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -767,7 +767,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -792,7 +792,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -821,7 +821,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -844,7 +844,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_Patient>(); 
                return Content(Session["status"].ToString() );
@@ -872,7 +872,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -903,7 +903,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -934,7 +934,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Patient' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Patient' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -965,7 +965,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -992,7 +992,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1017,7 +1017,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -1046,7 +1046,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1069,7 +1069,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_Tests>(); 
                return Content(Session["status"].ToString() );
@@ -1097,7 +1097,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1139,7 +1139,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1170,7 +1170,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Patient Tests' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Patient Tests' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -1201,7 +1201,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1226,7 +1226,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1251,7 +1251,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -1280,7 +1280,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1303,7 +1303,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_Test_List>(); 
                return Content(Session["status"].ToString() );
@@ -1331,7 +1331,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1360,7 +1360,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1391,7 +1391,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Test List' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Test List' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -1422,7 +1422,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1445,7 +1445,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1470,7 +1470,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -1499,7 +1499,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1522,7 +1522,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_Inventory>(); 
                return Content(Session["status"].ToString() );
@@ -1550,7 +1550,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1576,7 +1576,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1607,7 +1607,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Inventory' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Inventory' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );
@@ -1636,7 +1636,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1662,7 +1662,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if (centralCalls.get_role_right_Staff("  where role =  " + Session["role"] + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count == 0)
+            if (centralCalls.get_role_right_Staff("  where role =  " + Session["role"] + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count == 0)
             { 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
@@ -1698,7 +1698,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1724,7 +1724,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1750,8 +1750,8 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){
-                if (centralCalls.get_role_right_Staff("  where role =  " + Session["role"] + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count == 0)
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory Movement add' )   ").Count ==0){
+                if (centralCalls.get_role_right_Staff("  where role =  " + Session["role"] + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'new Inventory Movement allocate' )   ").Count == 0)
                 { 
                    Session["status"] = "You do not have access to this functionality";
                    Session["response"]  = "You do not have access to this functionality";
@@ -1782,7 +1782,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Inventory Movement' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Inventory Movement' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1805,7 +1805,7 @@ namespace Lo.Controllers
         {
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'view Inventory Movement' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'view Inventory Movement' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"] = new List<Lo_Inventory_Movement>(); 
                return Content(Session["status"].ToString() );
@@ -1833,7 +1833,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Inventory Movement' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Inventory Movement' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1867,7 +1867,7 @@ namespace Lo.Controllers
             {
                return RedirectToAction("Change_Password", "Staff");
             }
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Inventory Movement' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Inventory Movement' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                return RedirectToAction("Login", "Staff");
             }
@@ -1898,7 +1898,7 @@ namespace Lo.Controllers
         { 
                 Audit.protocol();
                 Session["status"] = "";
-            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from Lo_right_Staff where  replace(rightName,'_',' ') = 'edit Inventory Movement' )   ").Count ==0){ 
+            if(centralCalls.get_role_right_Staff("  where role =  "  + Session["role"]   + " and  `right` = (select id from lo_right_staff where  replace(rightName,'_',' ') = 'edit Inventory Movement' )   ").Count ==0){ 
                Session["status"] = "You do not have access to this functionality";
                Session["response"]  = "You do not have access to this functionality";
                return Content(Session["status"].ToString() );

@@ -117,6 +117,7 @@ namespace Lo.Controllers
             List<Lo_authenticate_SuperAdmin> response =null;
             if (String.IsNullOrEmpty(forgot))
             {
+
                 ActionResult xx = authenticate( password:  Password, email: Email ); 
                 response = ( List<Lo_authenticate_SuperAdmin>)Session["response"];
                 if(response !=null ){
@@ -148,13 +149,13 @@ namespace Lo.Controllers
                     }
                     else
                     {
-                        Session["status"] = "Authentication Not successful";
+                        Session["status"] = "Authentication Not successful.";
                         return RedirectToAction("Login", "SuperAdmin");
                     } 
                 }
                 else
                 {
-                    Session["status"] = "Authentication Not successful";
+                    Session["status"] = "Authentication Not successful.." +    Session["msg"];
                     return RedirectToAction("Login", "SuperAdmin");
                 } 
             }
@@ -171,8 +172,10 @@ namespace Lo.Controllers
             Audit.protocol(); 
             List<Lo_authenticate_SuperAdmin> response = null;  
             password =  Audit.GetEncodedHash(password, "doing it well") ;
-            response =  centralCalls.get_authenticate_SuperAdmin(" where replace(password, '@','#')  = '" + password.Replace("@", "#") + "' and replace(email, '@','#') = '" + email.Replace("@", "#") + "' ");
-            Session["response"]  = response;
+            string msg = "";
+            response =  centralCalls.get_authenticate_SuperAdmin(" where replace(password, '@','#')  = '" + password.Replace("@", "#") + "' and replace(email, '@','#') = '" + email.Replace("@", "#") + "' ", out msg);
+            Session["response"] = response;
+            Session["msg"] = msg;
             return Content(JsonConvert.SerializeObject((List<Lo_authenticate_SuperAdmin>)response));
         }
 
@@ -180,8 +183,9 @@ namespace Lo.Controllers
         public ActionResult forgotauthenticate_SuperAdmin(string Email )
         {   
             Audit.protocol();
-            List<Lo_authenticate_SuperAdmin> response = null; 
-            response =  centralCalls.get_authenticate_SuperAdmin(" where replace(email, '@','#') = '" + Email.Replace("@", "#") + "' ");
+            List<Lo_authenticate_SuperAdmin> response = null;
+            string msg = "";
+            response =  centralCalls.get_authenticate_SuperAdmin(" where replace(email, '@','#') = '" + Email.Replace("@", "#") + "' ", out msg);
             if(response !=null ){
                 if(response.Count > 0){
                         string strRND = Audit.GenerateRandom();
@@ -241,8 +245,9 @@ namespace Lo.Controllers
             List<Lo_authenticate_SuperAdmin> response = null; 
             string result = "Authentication failed"; 
             string strRND11 = password;
-            byte[] arr11 = Encoding.ASCII.GetBytes( Audit.GetEncodedHash(strRND11, "doing it well")); 
-            response =  centralCalls.get_authenticate_SuperAdmin(" where replace(password, '@','#')  = '" + Encoding.ASCII.GetString(arr11).Replace("@", "#") + "' and replace(email, '@','#') = '" + email.Replace("@", "#") + "' ");
+            byte[] arr11 = Encoding.ASCII.GetBytes(Audit.GetEncodedHash(strRND11, "doing it well"));
+            string msg = "";
+            response =  centralCalls.get_authenticate_SuperAdmin(" where replace(password, '@','#')  = '" + Encoding.ASCII.GetString(arr11).Replace("@", "#") + "' and replace(email, '@','#') = '" + email.Replace("@", "#") + "' ", out msg);
             if(response !=null ){
                 if(response.Count > 0){
                         string strRND = npassword;

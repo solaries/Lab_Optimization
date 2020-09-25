@@ -36,7 +36,8 @@ namespace Lo
 
             if (context.OwinContext.Get<string>("userType") == "SuperAdmin")
             {
-                List<Lo_authenticate_SuperAdmin> response = centralCalls.get_authenticate_SuperAdmin(" where replace(password, '@','#')  = '" + Audit.GetEncodedHash(context.Password, "doing it well").Replace("@", "#") + "' and replace(email, '@','#') = '" + context.UserName.Replace("@", "#") + "' ");
+                string msg = "";
+                List<Lo_authenticate_SuperAdmin> response = centralCalls.get_authenticate_SuperAdmin(" where replace(password, '@','#')  = '" + Audit.GetEncodedHash(context.Password, "doing it well").Replace("@", "#") + "' and replace(email, '@','#') = '" + context.UserName.Replace("@", "#") + "' ",out msg);
                 found = response.Count > 0;
             }
 

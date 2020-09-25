@@ -48,7 +48,7 @@ namespace Lo.Models
          public List<Lo_role_right_Staff_data> get_role_right_Staff_linked(string sql)
          {
              var context = Lo.Data.Models.Lo.GetInstance();
-             var actual = context.Fetch<Lo_role_right_Staff_data>( "select a.id , a.role , a1.roleName  role_data  , a.right , a2.rightName  right_data    from Lo_role_right_Staff a  inner join  Lo_role_Staff a1 on a.role = a1.id  inner join  Lo_right_Staff a2 on a.right = a2.id "  + sql);
+             var actual = context.Fetch<Lo_role_right_Staff_data>( "select a.id , a.role , a1.roleName  role_data  , a.right , a2.rightName  right_data    from lo_role_right_staff a  inner join  lo_role_staff a1 on a.role = a1.id  inner join  lo_right_staff a2 on a.right = a2.id "  + sql);
              return actual;
          }  
          public List<Lo_role_right_Staff> get_role_right_Staff(string sql)

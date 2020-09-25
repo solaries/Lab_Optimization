@@ -15466,7 +15466,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/04/2020 10:34:02</publishTime>
     </File>
     <File Include="bin/Lab Optimum.dll">
-      <publishTime>09/25/2020 20:40:58</publishTime>
+      <publishTime>09/25/2020 23:08:30</publishTime>
     </File>
     <File Include="bin/Microsoft.CSharp.dll">
       <publishTime>09/26/2012 03:16:08</publishTime>
@@ -15627,6 +15627,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/shared/_Staff.cshtml">
       <publishTime>09/24/2020 17:10:56</publishTime>
     </File>
+    <File Include="Views/shared/_SuperAdmin.cshtml">
+      <publishTime>09/20/2020 20:38:04</publishTime>
+    </File>
     <File Include="Views/Staff/Change_Password.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
     </File>
@@ -15636,6 +15639,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Staff/edit_Inventory_Movement.cshtml">
       <publishTime>09/25/2020 19:34:10</publishTime>
     </File>
+    <File Include="Views/Staff/edit_Patient Tests.cshtml">
+      <publishTime>09/24/2020 13:37:06</publishTime>
+    </File>
     <File Include="Views/Staff/edit_Patient.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
     </File>
@@ -15644,6 +15650,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Staff/edit_Roles.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
+    </File>
+    <File Include="Views/Staff/edit_Test Type.cshtml">
+      <publishTime>09/20/2020 17:27:46</publishTime>
     </File>
     <File Include="Views/Staff/edit_Test_List.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
@@ -15663,6 +15672,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Staff/new_Inventory_Movement_allocate.cshtml">
       <publishTime>09/24/2020 17:57:02</publishTime>
     </File>
+    <File Include="Views/Staff/new_Patient Tests.cshtml">
+      <publishTime>09/20/2020 17:27:46</publishTime>
+    </File>
     <File Include="Views/Staff/new_Patient.cshtml">
       <publishTime>09/23/2020 15:39:37</publishTime>
     </File>
@@ -15671,6 +15683,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Staff/new_Roles.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
+    </File>
+    <File Include="Views/Staff/new_Test Type.cshtml">
+      <publishTime>09/20/2020 17:27:46</publishTime>
     </File>
     <File Include="Views/Staff/new_Test_List.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
@@ -15690,6 +15705,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Staff/view_Inventory_Movement.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
     </File>
+    <File Include="Views/Staff/view_Patient Tests.cshtml">
+      <publishTime>09/20/2020 17:27:46</publishTime>
+    </File>
     <File Include="Views/Staff/view_Patient.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
     </File>
@@ -15698,6 +15716,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Staff/view_Roles.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
+    </File>
+    <File Include="Views/Staff/view_Test Type.cshtml">
+      <publishTime>09/20/2020 17:27:46</publishTime>
     </File>
     <File Include="Views/Staff/view_Test_List.cshtml">
       <publishTime>09/20/2020 20:38:04</publishTime>
